@@ -1,0 +1,222 @@
+{
+   "resultCount":6,
+   "results":[
+      {
+         "wrapperType":"track",
+         "kind":"podcast",
+         "collectionId":1201483158,
+         "trackId":1201483158,
+         "artistName":"Hoy Hablamos",
+         "collectionName":"Podcast diario para aprender español - Learn Spanish Daily Podcast",
+         "trackName":"Podcast diario para aprender español - Learn Spanish Daily Podcast",
+         "collectionCensoredName":"Podcast diario para aprender español - Learn Spanish Daily Podcast",
+         "trackCensoredName":"Podcast diario para aprender español - Learn Spanish Daily Podcast",
+         "collectionViewUrl":"https://podcasts.apple.com/us/podcast/podcast-diario-para-aprender-espa%C3%B1ol-learn-spanish/id1201483158?uo=4",
+         "feedUrl":"https://www.hoyhablamos.com/category/podcast/feed/",
+         "trackViewUrl":"https://podcasts.apple.com/us/podcast/podcast-diario-para-aprender-espa%C3%B1ol-learn-spanish/id1201483158?uo=4",
+         "artworkUrl30":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/30x30bb.jpg",
+         "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/60x60bb.jpg",
+         "artworkUrl100":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/100x100bb.jpg",
+         "collectionPrice":0.00,
+         "trackPrice":0.00,
+         "collectionHdPrice":0,
+         "releaseDate":"2024-04-03T08:30:00Z",
+         "collectionExplicitness":"notExplicit",
+         "trackExplicitness":"cleaned",
+         "trackCount":1870,
+         "trackTimeMillis":700,
+         "country":"USA",
+         "currency":"USD",
+         "primaryGenreName":"Language Learning",
+         "contentAdvisoryRating":"Clean",
+         "artworkUrl600":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/600x600bb.jpg",
+         "genreIds":[
+            "1498",
+            "26",
+            "1304",
+            "1501"
+         ],
+         "genres":[
+            "Language Learning",
+            "Podcasts",
+            "Education",
+            "Courses"
+         ]
+      },
+      {
+         "country":"USA",
+         "artworkUrl600":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/600x600bb.jpg",
+         "episodeUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_GRAM_224_Oraciones_condicionales_con_el_indicativo_mezcla.mp3",
+         "closedCaptioning":"none",
+         "collectionId":1201483158,
+         "collectionName":"Podcast diario para aprender español - Learn Spanish Daily Podcast",
+         "trackTimeMillis":700000,
+         "collectionViewUrl":"https://itunes.apple.com/us/podcast/podcast-diario-para-aprender-espa%C3%B1ol-learn-spanish/id1201483158?mt=2&uo=4",
+         "genres":[
+            {
+               "name":"Language Learning",
+               "id":"1498"
+            }
+         ],
+         "episodeGuid":"https://www.hoyhablamos.com/?p=244278",
+         "description":"En este episodio de gramática y lengua española vamos a practicar con las oraciones condicionales que emplean el modo indicativo, es decir, las oraciones condicionales más realizables. Puedes ver la transcripción de este audio y ejercicios para practicar en: www.hoyhablamos.com",
+         "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/60x60bb.jpg",
+         "contentAdvisoryRating":"Clean",
+         "trackViewUrl":"https://podcasts.apple.com/us/podcast/gram-224-oraciones-condicionales-con-el-indicativo/id1201483158?i=1000651283182&uo=4",
+         "releaseDate":"2024-04-03T08:30:35Z",
+         "feedUrl":"https://www.hoyhablamos.com/category/podcast/feed/",
+         "artworkUrl160":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/160x160bb.jpg",
+         "episodeFileExtension":"mp3",
+         "episodeContentType":"audio",
+         "shortDescription":"En este episodio de gramática y lengua española vamos a practicar con las oraciones condicionales que emplean el modo indicativo, es decir, las oraciones condicionales más realizables. Puedes ver la transcripción de este audio y ejercicios para prac",
+         "artistIds":[
+            
+         ],
+         "trackId":1000651283182,
+         "trackName":"GRAM 224. Oraciones condicionales con el indicativo",
+         "previewUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_GRAM_224_Oraciones_condicionales_con_el_indicativo_mezcla.mp3",
+         "kind":"podcast-episode",
+         "wrapperType":"podcastEpisode"
+      },
+      {
+         "country":"USA",
+         "artworkUrl600":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/600x600bb.jpg",
+         "episodeUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_1786_Camar_n_de_la_Isla_mezcla.mp3",
+         "closedCaptioning":"none",
+         "collectionId":1201483158,
+         "collectionName":"Podcast diario para aprender español - Learn Spanish Daily Podcast",
+         "trackTimeMillis":717000,
+         "collectionViewUrl":"https://itunes.apple.com/us/podcast/podcast-diario-para-aprender-espa%C3%B1ol-learn-spanish/id1201483158?mt=2&uo=4",
+         "genres":[
+            {
+               "name":"Language Learning",
+               "id":"1498"
+            }
+         ],
+         "episodeGuid":"https://www.hoyhablamos.com/?p=244201",
+         "description":"Hoy hablamos de uno de los cantaores de flamenco más importantes de la historia. Muchas gracias por escucharnos, si quieres acceder a ventajas y apoyar este podcast hazte suscriptor premium en: www.hoyhablamos.com",
+         "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/60x60bb.jpg",
+         "contentAdvisoryRating":"Clean",
+         "trackViewUrl":"https://podcasts.apple.com/us/podcast/1786-camar%C3%B3n-de-la-isla/id1201483158?i=1000651166782&uo=4",
+         "releaseDate":"2024-04-02T09:11:05Z",
+         "feedUrl":"https://www.hoyhablamos.com/category/podcast/feed/",
+         "artworkUrl160":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/160x160bb.jpg",
+         "episodeFileExtension":"mp3",
+         "episodeContentType":"audio",
+         "shortDescription":"Hoy hablamos de uno de los cantaores de flamenco más importantes de la historia. Muchas gracias por escucharnos, si quieres acceder a ventajas y apoyar este podcast hazte suscriptor premium en: www.hoyhablamos.com",
+         "artistIds":[
+            
+         ],
+         "trackId":1000651166782,
+         "trackName":"1786. Camarón de la Isla",
+         "previewUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_1786_Camar_n_de_la_Isla_mezcla.mp3",
+         "kind":"podcast-episode",
+         "wrapperType":"podcastEpisode"
+      },
+      {
+         "country":"USA",
+         "artworkUrl600":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/600x600bb.jpg",
+         "episodeUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_1785_La_infancia_mezcla.mp3",
+         "closedCaptioning":"none",
+         "collectionId":1201483158,
+         "collectionName":"Podcast diario para aprender español - Learn Spanish Daily Podcast",
+         "trackTimeMillis":714000,
+         "collectionViewUrl":"https://itunes.apple.com/us/podcast/podcast-diario-para-aprender-espa%C3%B1ol-learn-spanish/id1201483158?mt=2&uo=4",
+         "genres":[
+            {
+               "name":"Language Learning",
+               "id":"1498"
+            }
+         ],
+         "episodeGuid":"https://www.hoyhablamos.com/?p=244193",
+         "description":"Comenzamos un nuevo tema del mes. Este mes hablamos de las etapas de la vida. Muchas gracias por escucharnos, si quieres acceder a ventajas y apoyar este podcast hazte suscriptor premium en: www.hoyhablamos.com",
+         "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/60x60bb.jpg",
+         "contentAdvisoryRating":"Clean",
+         "trackViewUrl":"https://podcasts.apple.com/us/podcast/1785-la-infancia/id1201483158?i=1000651065168&uo=4",
+         "releaseDate":"2024-04-01T12:17:29Z",
+         "feedUrl":"https://www.hoyhablamos.com/category/podcast/feed/",
+         "artworkUrl160":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/160x160bb.jpg",
+         "episodeFileExtension":"mp3",
+         "episodeContentType":"audio",
+         "shortDescription":"Comenzamos un nuevo tema del mes. Este mes hablamos de las etapas de la vida. Muchas gracias por escucharnos, si quieres acceder a ventajas y apoyar este podcast hazte suscriptor premium en: www.hoyhablamos.com",
+         "artistIds":[
+            
+         ],
+         "trackId":1000651065168,
+         "trackName":"1785. La infancia",
+         "previewUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_1785_La_infancia_mezcla.mp3",
+         "kind":"podcast-episode",
+         "wrapperType":"podcastEpisode"
+      },
+      {
+         "country":"USA",
+         "artworkUrl600":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/600x600bb.jpg",
+         "episodeUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_1784_Los_canis_y_chonis_mezcla.mp3",
+         "closedCaptioning":"none",
+         "collectionId":1201483158,
+         "collectionName":"Podcast diario para aprender español - Learn Spanish Daily Podcast",
+         "trackTimeMillis":1869000,
+         "collectionViewUrl":"https://itunes.apple.com/us/podcast/podcast-diario-para-aprender-espa%C3%B1ol-learn-spanish/id1201483158?mt=2&uo=4",
+         "genres":[
+            {
+               "name":"Language Learning",
+               "id":"1498"
+            }
+         ],
+         "episodeGuid":"https://www.hoyhablamos.com/?p=244126",
+         "description":"Hoy Paco y Roi hablan sobre los canis y las chonis, una tribu urbana ya extinta, pero que fue muy popular entre los años 2000 y 2010. En el podcast premium, Rebe y yo hablamos de los caseros. Comentaremos nuestra experiencia con nuestros dos anteriores caseros y hablaremos sobre cómo debe ser un buen casero según nuestro punto de vista. Puedes escuchar este episodio si te haces suscriptor premium en: hoyhablamos.com.",
+         "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/60x60bb.jpg",
+         "contentAdvisoryRating":"Clean",
+         "trackViewUrl":"https://podcasts.apple.com/us/podcast/1784-los-canis-y-chonis/id1201483158?i=1000650825056&uo=4",
+         "releaseDate":"2024-03-29T09:43:04Z",
+         "feedUrl":"https://www.hoyhablamos.com/category/podcast/feed/",
+         "artworkUrl160":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/160x160bb.jpg",
+         "episodeFileExtension":"mp3",
+         "episodeContentType":"audio",
+         "shortDescription":"Hoy Paco y Roi hablan sobre los canis y las chonis, una tribu urbana ya extinta, pero que fue muy popular entre los años 2000 y 2010. En el podcast premium, Rebe y yo hablamos de los caseros. Comentaremos nuestra experiencia con nuestros dos anteriores",
+         "artistIds":[
+            
+         ],
+         "trackId":1000650825056,
+         "trackName":"1784. Los canis y chonis",
+         "previewUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_1784_Los_canis_y_chonis_mezcla.mp3",
+         "kind":"podcast-episode",
+         "wrapperType":"podcastEpisode"
+      },
+      {
+         "country":"USA",
+         "artworkUrl600":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/600x600bb.jpg",
+         "episodeUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_1783_Noticias_en_espa_ol_mezcla.mp3",
+         "closedCaptioning":"none",
+         "collectionId":1201483158,
+         "collectionName":"Podcast diario para aprender español - Learn Spanish Daily Podcast",
+         "trackTimeMillis":703000,
+         "collectionViewUrl":"https://itunes.apple.com/us/podcast/podcast-diario-para-aprender-espa%C3%B1ol-learn-spanish/id1201483158?mt=2&uo=4",
+         "genres":[
+            {
+               "name":"Language Learning",
+               "id":"1498"
+            }
+         ],
+         "episodeGuid":"https://www.hoyhablamos.com/?p=244115",
+         "description":"Hoy hablamos de estas noticias: la historia de un juguete que se pensó que podía espiar, unas joyas de leche y una muestra de amor que puede verse desde las alturas. Muchas gracias por escucharnos, si quieres acceder a ventajas y apoyar este podcast hazte suscriptor premium en: www.hoyhablamos.com",
+         "artworkUrl60":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/60x60bb.jpg",
+         "contentAdvisoryRating":"Clean",
+         "trackViewUrl":"https://podcasts.apple.com/us/podcast/1783-noticias-en-espa%C3%B1ol/id1201483158?i=1000650708228&uo=4",
+         "releaseDate":"2024-03-28T08:58:25Z",
+         "feedUrl":"https://www.hoyhablamos.com/category/podcast/feed/",
+         "artworkUrl160":"https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/160x160bb.jpg",
+         "episodeFileExtension":"mp3",
+         "episodeContentType":"audio",
+         "shortDescription":"Hoy hablamos de estas noticias: la historia de un juguete que se pensó que podía espiar, unas joyas de leche y una muestra de amor que puede verse desde las alturas. Muchas gracias por escucharnos, si quieres acceder a ventajas y apoyar este podcast h",
+         "artistIds":[
+            
+         ],
+         "trackId":1000650708228,
+         "trackName":"1783. Noticias en español",
+         "previewUrl":"https://media.blubrry.com/podcast_diario_de_espaol/content.blubrry.com/podcast_diario_de_espaol/Episodio_1783_Noticias_en_espa_ol_mezcla.mp3",
+         "kind":"podcast-episode",
+         "wrapperType":"podcastEpisode"
+      }
+   ]
+}
