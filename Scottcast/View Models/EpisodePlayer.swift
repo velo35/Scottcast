@@ -6,30 +6,41 @@
 //
 
 import Foundation
-import AVFAudio
-
-enum EpisodePlayerError: Error
-{
-    case play
-}
+import AVFoundation
 
 @Observable
-class EpisodePlayer
+class EpisodePlayer: NSObject
 {
-    private var player: AVAudioPlayer?
+    private var player: AVPlayer?
     
-    var episode: Episode?
-    var isActive = false
+    var episode: Episode? {
+        didSet {
+            guard let episode, let url = episode.fileUrl else { return }
+            let player = AVPlayer(url: url)
+            player.addObserver(self, forKeyPath: "rate", options: .new, context: nil)
+            self.player = player
+        }
+    }
     
-    func play() throws
+    var rate: Float = 0.0
+    
+    var isPlaying: Bool { self.rate != 0.0 }
+    
+    func play()
     {
-        guard let url = self.episode?.fileUrl else { throw EpisodePlayerError.play }
-        self.player = try AVAudioPlayer(contentsOf: url)
         self.player?.play()
     }
     
-    func stop()
+    func pause()
     {
-        self.player?.stop()
+        self.player?.pause()
+    }
+    
+    @objc
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
+    {
+        if keyPath == "rate", let rate = change?[.newKey] as? Float {
+            self.rate = rate
+        }
     }
 }

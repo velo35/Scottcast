@@ -14,39 +14,55 @@ struct EpisodeCellView: View
     
     let episode: Episode
     
+    var downloadButton: some View
+    {
+        Button {
+            Task {
+                do {
+                    try await viewModel.download(episode: episode)
+                } catch {
+                    print(error.localizedDescription)
+                }
+            }
+        } label: {
+            Image(systemName: "arrow.down.circle")
+                .imageScale(.large)
+        }
+        .buttonStyle(.plain)
+    }
+    
+    var playPauseButton: some View
+    {
+        Button {
+            if episodePlayer.episode != episode {
+                episodePlayer.episode = episode
+            }
+            
+            if !episodePlayer.isPlaying {
+                episodePlayer.play()
+            }
+            else {
+                episodePlayer.pause()
+            }
+        } label: {
+            Image(systemName: episodePlayer.isPlaying ? "pause.circle" : "play.circle")
+                .imageScale(.large)
+        }
+        .buttonStyle(.plain)
+    }
+    
     var body: some View
     {
         VStack(alignment: .leading, spacing: 4) {
             Text(episode.title)
             
-            Button {
-                do {
-                    episodePlayer.episode = episode
-                    try episodePlayer.play()
-                } catch {
-                    print(error.localizedDescription)
-                }
-            } label: {
-                Image(systemName: "play.circle")
-            }
-            .buttonStyle(.plain)
-            
             HStack {
-                Button {
-                    Task {
-                        do {
-                            try await viewModel.download(episode: episode)
-                        } catch {
-                            print(error.localizedDescription)
-                        }
-                    }
-                } label: {
-                    Image(systemName: episode.fileUrl == nil ? "arrow.down.circle" : "arrow.down.circle.fill")
-                        .imageScale(.large)
-                        .foregroundStyle(episode.fileUrl == nil ? .primary : Color.cyan)
+                if episode.fileUrl == nil {
+                    downloadButton
                 }
-                .buttonStyle(.plain)
-                .disabled(episode.fileUrl != nil)
+                else {
+                    playPauseButton
+                }
                 
                 if episode.isDownloading {
                     ProgressView(value: episode.downloadProgress)

@@ -8,7 +8,8 @@
 import Foundation
 
 @Observable
-class Episode: Identifiable, Decodable
+final // <- Decodable - depends on required init or final class?
+class Episode: Identifiable
 {
     let id: Int
     let podcastId: Int
@@ -33,7 +34,14 @@ class Episode: Identifiable, Decodable
     }
 }
 
-extension Episode
+extension Episode: Equatable
+{
+    static func == (lhs: Episode, rhs: Episode) -> Bool {
+        lhs.id == rhs.id
+    }
+}
+
+extension Episode: Decodable
 {
     enum CodingKeys: String, CodingKey
     {
