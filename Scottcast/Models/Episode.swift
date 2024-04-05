@@ -17,7 +17,7 @@ class Episode: Identifiable, Decodable
     let description: String
     let durationMillis: Int
     let url: URL
-    var audioUrl: URL?
+    var fileUrl: URL?
     
     var isDownloading = false
     var downloadProgress = 0.0

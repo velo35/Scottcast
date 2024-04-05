@@ -13,9 +13,6 @@ class PodcastViewModel
     private(set) var podcast: Podcast?
     private var downloading = [URL: Download]()
     
-    @ObservationIgnored
-    private lazy var downloader = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
-    
     init()
     {
         Task {
@@ -45,18 +42,8 @@ class PodcastViewModel
             switch event {
                 case .progress(let progress):
                     episode.downloadProgress = progress
-                case .finished(let location):
-                    let fileManager = FileManager.default
-//                    let documents = URL.documentsDirectory
-//                    let podcasts = documents.appending(component: "Podcasts", directoryHint: .isDirectory)
-//                    let podcast = podcasts.appending(path: "\(episode.podcastId)", directoryHint: .isDirectory)
-                    if !fileManager.fileExists(atPath: episode.directoryUrl.path()) {
-                        try fileManager.createDirectory(at: episode.directoryUrl, withIntermediateDirectories: true)
-                    }
-//                    let audioUrl = podcast.appending(component: "\(episode.id)").appendingPathExtension("mp3")
-                    print("go: \(fileManager.fileExists(atPath: location.path()))")
-//                    print("to: \(location)")
-                    try fileManager.moveItem(at: location, to: episode.fileUrl)
+                case .finished(let url):
+                    episode.fileUrl = url
                 case .error:
                     print("failed!")
             }

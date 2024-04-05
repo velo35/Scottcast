@@ -19,7 +19,6 @@ class Download: NSObject
     private static let downloader = URLSession(configuration: .default)
     
     private let episode: Episode
-//    private let task: URLSessionDownloadTask
     private var continuation: AsyncStream<Event>.Continuation?
     
     private lazy var task = {
@@ -51,16 +50,12 @@ extension Download: URLSessionDownloadDelegate
     {
         do {
             let fileManager = FileManager.default
-            let tempDirectory = try fileManager.url(
-                for: .itemReplacementDirectory,
-                in: .userDomainMask,
-                appropriateFor: episode.fileUrl,
-                create: true
-            )
-            let tempFile = tempDirectory.appending(component: ProcessInfo().globallyUniqueString)
-            try fileManager.moveItem(at: location, to: tempFile)
-            print("tmp: \(fileManager.fileExists(atPath: tempFile.path()))")
-            self.continuation?.yield(.finished(tempFile))
+            let episodesPath = episode.preferredUrl.deletingLastPathComponent()
+            if !fileManager.fileExists(atPath: episodesPath.path()) {
+                try fileManager.createDirectory(at: episodesPath, withIntermediateDirectories: true)
+            }
+            try fileManager.moveItem(at: location, to: episode.preferredUrl)
+            self.continuation?.yield(.finished(episode.preferredUrl))
         } catch {
             print("finished error: \(error.localizedDescription)")
             self.continuation?.yield(.error)
@@ -76,13 +71,15 @@ extension Download: URLSessionDownloadDelegate
 
 extension Episode
 {
-    var directoryUrl: URL {
+    var pocastsUrl: URL {
         URL.documentsDirectory
+            .appending(component: "Pocasts")
             .appending(component: "\(self.podcastId)")
     }
     
-    var fileUrl: URL {
-        directoryUrl
+    var preferredUrl: URL {
+        pocastsUrl
+            .appending(component: "Episodes")
             .appending(component: "\(self.id)")
             .appendingPathExtension("mp3")
     }

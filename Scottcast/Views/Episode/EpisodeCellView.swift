@@ -28,11 +28,12 @@ struct EpisodeCellView: View
                         }
                     }
                 } label: {
-                    Image(systemName: episode.audioUrl == nil ? "arrow.down.circle" : "arrow.down.circle.fill")
+                    Image(systemName: episode.fileUrl == nil ? "arrow.down.circle" : "arrow.down.circle.fill")
                         .imageScale(.large)
-                        .foregroundStyle(episode.audioUrl == nil ? .primary : Color.cyan)
+                        .foregroundStyle(episode.fileUrl == nil ? .primary : Color.cyan)
                 }
                 .buttonStyle(.plain)
+                .disabled(episode.fileUrl != nil)
                 
                 if episode.isDownloading {
                     ProgressView(value: episode.downloadProgress)
