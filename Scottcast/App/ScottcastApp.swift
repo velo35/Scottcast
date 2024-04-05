@@ -13,6 +13,7 @@ struct ScottcastApp: App {
         WindowGroup {
             ContentView()
                 .environment(PodcastViewModel())
+                .environment(EpisodePlayer())
         }
     }
 }

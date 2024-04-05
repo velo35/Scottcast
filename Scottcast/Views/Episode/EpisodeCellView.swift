@@ -10,6 +10,7 @@ import SwiftUI
 struct EpisodeCellView: View
 {
     @Environment(PodcastViewModel.self) var viewModel
+    @Environment(EpisodePlayer.self) var episodePlayer
     
     let episode: Episode
     
@@ -17,6 +18,18 @@ struct EpisodeCellView: View
     {
         VStack(alignment: .leading, spacing: 4) {
             Text(episode.title)
+            
+            Button {
+                do {
+                    episodePlayer.episode = episode
+                    try episodePlayer.play()
+                } catch {
+                    print(error.localizedDescription)
+                }
+            } label: {
+                Image(systemName: "play.circle")
+            }
+            .buttonStyle(.plain)
             
             HStack {
                 Button {
@@ -50,4 +63,5 @@ struct EpisodeCellView: View
 #Preview {
     EpisodeCellView(episode: .mock)
         .environment(PodcastViewModel())
+        .environment(EpisodePlayer())
 }

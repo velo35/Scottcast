@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View 
 {
-    @State var viewModel = PodcastViewModel()
+    @Environment(PodcastViewModel.self) var viewModel
     
     var body: some View
     {
@@ -26,4 +26,5 @@ struct ContentView: View
 
 #Preview {
     ContentView()
+        .environment(PodcastViewModel())
 }
