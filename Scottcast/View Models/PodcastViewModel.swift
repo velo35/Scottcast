@@ -17,7 +17,7 @@ class PodcastViewModel
     {
         Task {
             do {
-                let url = URL(string: "https://itunes.apple.com/lookup?id=1201483158&media=podcast&entity=podcastEpisode&limit=5")!
+                let url = URL(string: "https://itunes.apple.com/lookup?id=1201483158&media=podcast&entity=podcastEpisode&limit=1")!
                 let data = try await NetworkService.fetch(url: url)
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .iso8601
@@ -34,19 +34,17 @@ class PodcastViewModel
     {
         let download = Download(episode: episode)
         
-        episode.isDownloading = true
-        defer {
-            episode.isDownloading = false
-        }
+        podcast?[episode.id]?.isDownloading = true
         for await event in download.events {
             switch event {
-                case .progress(let progress):
-                    episode.downloadProgress = progress
+                case let .progress(totalBytesWritten, totalBytesExpectedToWrite):
+                    podcast?[episode.id]?.updateProgress(currentBytes: totalBytesWritten, totalBytes: totalBytesExpectedToWrite)
                 case .finished(let url):
-                    episode.fileUrl = url
+                    podcast?[episode.id]?.fileUrl = url
                 case .error:
                     print("failed!")
             }
         }
+        podcast?[episode.id]?.isDownloading = false
     }
 }

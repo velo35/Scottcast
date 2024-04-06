@@ -7,13 +7,39 @@
 
 import Foundation
 
-struct Podcast: Identifiable, Decodable
+struct Podcast: Identifiable
 {
     let id: Int
     let title: String
     let author: String
     let artworkUrl: URL
-    let episodes: [Episode]
+    var episodes: [Episode]
+    
+    subscript(episodeId: Episode.ID) -> Episode? {
+        get {
+            episodes.first{ episodeId == $0.id }
+        }
+        set {
+            guard let newValue, let index = episodes.firstIndex(where: { episodeId == $0.id }) else { return }
+            episodes[index] = newValue
+        }
+    }
+}
+
+extension Podcast: Decodable
+{
+    enum ContainerKeys: String, CodingKey
+    {
+        case results
+    }
+    
+    enum PodcastKeys: String, CodingKey
+    {
+        case id = "collectionId"
+        case title = "collectionName"
+        case author = "artistName"
+        case artworkUrl = "artworkUrl600"
+    }
     
     init(from decoder: Decoder) throws
     {
@@ -31,21 +57,5 @@ struct Podcast: Identifiable, Decodable
             episodes.append(try resultsContainer.decode(Episode.self))
         }
         self.episodes = episodes
-    }
-}
-
-extension Podcast
-{
-    enum ContainerKeys: String, CodingKey
-    {
-        case results
-    }
-    
-    enum PodcastKeys: String, CodingKey
-    {
-        case id = "collectionId"
-        case title = "collectionName"
-        case author = "artistName"
-        case artworkUrl = "artworkUrl600"
     }
 }

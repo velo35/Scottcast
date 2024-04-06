@@ -67,9 +67,6 @@ struct EpisodeCellView: View
                 if episode.isDownloading {
                     ProgressView(value: episode.downloadProgress)
                 }
-                else {
-//                    Spacer()
-                }
             }
             .padding(6)
         }

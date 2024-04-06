@@ -9,12 +9,12 @@ import SwiftUI
 
 struct PodcastView: View 
 {
-    let podcast: Podcast
+    @Environment(PodcastViewModel.self) var viewModel
     
     var body: some View
     {
         VStack {
-            AsyncImage(url: podcast.artworkUrl) { image in
+            AsyncImage(url: viewModel.podcast?.artworkUrl) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)
@@ -23,15 +23,15 @@ struct PodcastView: View
             }
             .frame(width: 200, height: 200)
             
-            Text(podcast.author)
+            Text(viewModel.podcast?.author ?? "")
                 .font(.largeTitle.weight(.semibold))
             
-            Text(podcast.title)
+            Text(viewModel.podcast?.title ?? "")
                 .font(.subheadline)
                 .multilineTextAlignment(.center)
             
             List {
-                ForEach(podcast.episodes) { episode in
+                ForEach(viewModel.podcast?.episodes ?? []) { episode in
                     EpisodeCellView(episode: episode)
                 }
             }
@@ -40,6 +40,6 @@ struct PodcastView: View
 }
 
 #Preview {
-    PodcastView(podcast: .mock)
+    PodcastView()
         .environment(PodcastViewModel())
 }

@@ -7,9 +7,7 @@
 
 import Foundation
 
-@Observable
-final // <- Decodable - depends on required init or final class?
-class Episode: Identifiable
+struct Episode: Identifiable, Equatable
 {
     let id: Int
     let podcastId: Int
@@ -21,23 +19,17 @@ class Episode: Identifiable
     var fileUrl: URL?
     
     var isDownloading = false
-    var downloadProgress = 0.0
-    
-    init(id: Int, podcastId: Int, title: String, date: Date, description: String, durationMillis: Int, url: URL) {
-        self.id = id
-        self.podcastId = podcastId
-        self.title = title
-        self.date = date
-        self.description = description
-        self.durationMillis = durationMillis
-        self.url = url
+    var downloadProgress: Double {
+        self.totalBytes > 0 ? Double(self.currentBytes) / Double(self.totalBytes) : 0.0
     }
-}
-
-extension Episode: Equatable
-{
-    static func == (lhs: Episode, rhs: Episode) -> Bool {
-        lhs.id == rhs.id
+    
+    var currentBytes: Int64 = 0
+    var totalBytes: Int64 = 0
+    
+    mutating func updateProgress(currentBytes: Int64, totalBytes: Int64)
+    {
+        self.currentBytes = currentBytes
+        self.totalBytes = totalBytes
     }
 }
 

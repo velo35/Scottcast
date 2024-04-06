@@ -11,7 +11,7 @@ class Download: NSObject
 {
     enum Event
     {
-        case progress(Double)
+        case progress(Int64, Int64)
         case finished(URL)
         case error
     }
@@ -63,9 +63,9 @@ extension Download: URLSessionDownloadDelegate
         self.continuation?.finish()
     }
     
-    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) {
-        let progress = Double(totalBytesWritten) / Double(totalBytesExpectedToWrite)
-        self.continuation?.yield(.progress(progress))
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
+    {
+        self.continuation?.yield(.progress(totalBytesWritten, totalBytesExpectedToWrite))
     }
 }
 
