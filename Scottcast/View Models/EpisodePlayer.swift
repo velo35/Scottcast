@@ -11,6 +11,9 @@ import AVFoundation
 @Observable
 class EpisodePlayer: NSObject
 {
+    static let shared = EpisodePlayer()
+    override private init() {}
+    
     private var player: AVPlayer?
     
     var episode: Episode? {

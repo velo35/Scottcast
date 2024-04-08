@@ -59,3 +59,79 @@ extension Podcast: Decodable
         self.episodes = episodes
     }
 }
+
+extension Podcast
+{
+    func serialize() throws -> Data
+    {
+        var plist = [String: Any]()
+        plist["id"] = self.id
+        plist["title"] = self.title
+        plist["author"] = self.author
+        plist["artworkUrl"] = self.artworkUrl.absoluteString
+        plist["episodes"] = self.episodes.map {
+            var plist = [String: Any]()
+            plist["id"] = $0.id
+            plist["podcastId"] = $0.podcastId
+            plist["title"] = $0.title
+            plist["date"] = $0.date
+            plist["description"] = $0.description
+            plist["durationMillis"] = $0.durationMillis
+            plist["url"] = $0.url.absoluteString
+            plist["fileUrl"] = $0.fileUrl?.absoluteString ?? ""
+            plist["isDownloading"] = $0.isDownloading
+            plist["currentBytes"] = $0.currentBytes
+            plist["totalBytes"] = $0.totalBytes
+            return plist
+        }
+        
+        return try PropertyListSerialization.data(fromPropertyList: plist, format: .xml, options: .zero)
+    }
+    
+    enum DeserializationError: Error
+    {
+        case plist
+    }
+    
+    static func deserialize(data: Data) throws -> Podcast
+    {
+        guard let plist = try PropertyListSerialization.propertyList(from: data, format: nil) as? [String: Any],
+              let id = plist["id"] as? Int,
+              let title = plist["title"] as? String,
+              let author = plist["author"] as? String,
+              let artwork = plist["artworkUrl"] as? String,
+              let artworkUrl = URL(string: artwork),
+              let episodesList = plist["episodes"] as? [[String: Any]]
+        else { throw DeserializationError.plist }
+        let episodes = episodesList.compactMap{ plist -> Episode? in
+            guard let id = plist["id"] as? Int,
+                  let podcastId = plist["podcastId"] as? Int,
+                  let title = plist["title"] as? String,
+                  let date = plist["date"] as? Date,
+                  let description = plist["description"] as? String,
+                  let durationMillis = plist["durationMillis"] as? Int,
+                  let urlStr = plist["url"] as? String,
+                  let url = URL(string: urlStr),
+                  let fileStr = plist["fileUrl"] as? String,
+                  let isDownloading = plist["isDownloading"] as? Bool,
+                  let currentBytes = plist["currentBytes"] as? Int64,
+                  let totalBytes = plist["totalBytes"] as? Int64
+            else { return nil }
+            let fileUrl = URL(string: fileStr)
+            return Episode(
+                id: id,
+                podcastId: podcastId,
+                title: title,
+                date: date,
+                description: description,
+                durationMillis: durationMillis,
+                url: url,
+                fileUrl: fileUrl,
+                isDownloading: isDownloading,
+                currentBytes: currentBytes,
+                totalBytes: totalBytes
+            )
+        }
+        return Podcast(id: id, title: title, author: author, artworkUrl: artworkUrl, episodes: episodes)
+    }
+}

@@ -10,7 +10,6 @@ import SwiftUI
 struct EpisodeCellView: View
 {
     @Environment(PodcastViewModel.self) var viewModel
-    @Environment(EpisodePlayer.self) var episodePlayer
     
     let episode: Episode
     
@@ -34,6 +33,7 @@ struct EpisodeCellView: View
     var playPauseButton: some View
     {
         Button {
+            let episodePlayer = EpisodePlayer.shared
             if episodePlayer.episode != episode {
                 episodePlayer.episode = episode
             }
@@ -45,7 +45,7 @@ struct EpisodeCellView: View
                 episodePlayer.pause()
             }
         } label: {
-            Image(systemName: episodePlayer.isPlaying ? "pause.circle" : "play.circle")
+            Image(systemName: EpisodePlayer.shared.isPlaying ? "pause.circle" : "play.circle")
                 .imageScale(.large)
         }
         .buttonStyle(.plain)
@@ -76,5 +76,4 @@ struct EpisodeCellView: View
 #Preview {
     EpisodeCellView(episode: .mock)
         .environment(PodcastViewModel())
-        .environment(EpisodePlayer())
 }
