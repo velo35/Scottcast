@@ -16,7 +16,8 @@ struct Episode: Identifiable, Equatable
     let description: String
     let durationMillis: Int
     let url: URL
-    var fileUrl: URL?
+    var isDownloaded = false
+    
     var isDownloading = false
     var currentBytes: Int64 = 0
     var totalBytes: Int64 = 0
@@ -29,6 +30,18 @@ struct Episode: Identifiable, Equatable
     {
         self.currentBytes = currentBytes
         self.totalBytes = totalBytes
+    }
+}
+
+extension Episode
+{
+    var fileUrl: URL {
+        URL.documentsDirectory
+            .appending(component: "Pocasts")
+            .appending(component: "\(self.podcastId)")
+            .appending(component: "Episodes")
+            .appending(component: "\(self.id)")
+            .appendingPathExtension("mp3")
     }
 }
 

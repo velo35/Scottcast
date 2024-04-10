@@ -18,8 +18,8 @@ class EpisodePlayer: NSObject
     
     var episode: Episode? {
         didSet {
-            guard let episode, let url = episode.fileUrl else { return }
-            let player = AVPlayer(url: url)
+            guard let episode, episode != oldValue, episode.isDownloaded else { return }
+            let player = AVPlayer(url: episode.fileUrl)
             player.addObserver(self, forKeyPath: "rate", options: .new, context: nil)
             self.player = player
         }

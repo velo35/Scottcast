@@ -34,9 +34,7 @@ struct EpisodeCellView: View
     {
         Button {
             let episodePlayer = EpisodePlayer.shared
-            if episodePlayer.episode != episode {
-                episodePlayer.episode = episode
-            }
+            episodePlayer.episode = episode
             
             if !episodePlayer.isPlaying {
                 episodePlayer.play()
@@ -57,11 +55,11 @@ struct EpisodeCellView: View
             Text(episode.title)
             
             HStack {
-                if episode.fileUrl == nil {
-                    downloadButton
+                if episode.isDownloaded {
+                    playPauseButton
                 }
                 else {
-                    playPauseButton
+                    downloadButton
                 }
                 
                 if episode.isDownloading {

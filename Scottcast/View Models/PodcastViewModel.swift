@@ -47,8 +47,8 @@ class PodcastViewModel
             switch event {
                 case let .progress(totalBytesWritten, totalBytesExpectedToWrite):
                     podcast?[episode.id]?.updateProgress(currentBytes: totalBytesWritten, totalBytes: totalBytesExpectedToWrite)
-                case .finished(let url):
-                    podcast?[episode.id]?.fileUrl = url
+                case .finished:
+                    podcast?[episode.id]?.isDownloaded = true
                 case .error:
                     print("failed!")
             }

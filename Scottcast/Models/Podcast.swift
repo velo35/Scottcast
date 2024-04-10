@@ -78,7 +78,7 @@ extension Podcast
             plist["description"] = $0.description
             plist["durationMillis"] = $0.durationMillis
             plist["url"] = $0.url.absoluteString
-            plist["fileUrl"] = $0.fileUrl?.absoluteString ?? ""
+            plist["isDownloaded"] = $0.isDownloaded
             plist["isDownloading"] = $0.isDownloading
             plist["currentBytes"] = $0.currentBytes
             plist["totalBytes"] = $0.totalBytes
@@ -112,12 +112,11 @@ extension Podcast
                   let durationMillis = plist["durationMillis"] as? Int,
                   let urlStr = plist["url"] as? String,
                   let url = URL(string: urlStr),
-                  let fileStr = plist["fileUrl"] as? String,
+                  let isDownloaded = plist["isDownloaded"] as? Bool,
                   let isDownloading = plist["isDownloading"] as? Bool,
                   let currentBytes = plist["currentBytes"] as? Int64,
                   let totalBytes = plist["totalBytes"] as? Int64
             else { return nil }
-            let fileUrl = URL(string: fileStr)
             return Episode(
                 id: id,
                 podcastId: podcastId,
@@ -126,7 +125,7 @@ extension Podcast
                 description: description,
                 durationMillis: durationMillis,
                 url: url,
-                fileUrl: fileUrl,
+                isDownloaded: isDownloaded,
                 isDownloading: isDownloading,
                 currentBytes: currentBytes,
                 totalBytes: totalBytes

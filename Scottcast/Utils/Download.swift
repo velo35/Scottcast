@@ -12,7 +12,7 @@ class Download: NSObject
     enum Event
     {
         case progress(Int64, Int64)
-        case finished(URL)
+        case finished
         case error
     }
     
@@ -50,12 +50,12 @@ extension Download: URLSessionDownloadDelegate
     {
         do {
             let fileManager = FileManager.default
-            let episodesPath = episode.preferredUrl.deletingLastPathComponent()
-            if !fileManager.fileExists(atPath: episodesPath.path()) {
-                try fileManager.createDirectory(at: episodesPath, withIntermediateDirectories: true)
+            let episodesDirectory = episode.fileUrl.deletingLastPathComponent()
+            if !fileManager.fileExists(atPath: episodesDirectory.path()) {
+                try fileManager.createDirectory(at: episodesDirectory, withIntermediateDirectories: true)
             }
-            try fileManager.moveItem(at: location, to: episode.preferredUrl)
-            self.continuation?.yield(.finished(episode.preferredUrl))
+            try fileManager.moveItem(at: location, to: episode.fileUrl)
+            self.continuation?.yield(.finished)
         } catch {
             print("finished error: \(error.localizedDescription)")
             self.continuation?.yield(.error)
@@ -66,21 +66,5 @@ extension Download: URLSessionDownloadDelegate
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64)
     {
         self.continuation?.yield(.progress(totalBytesWritten, totalBytesExpectedToWrite))
-    }
-}
-
-extension Episode
-{
-    var pocastsUrl: URL {
-        URL.documentsDirectory
-            .appending(component: "Pocasts")
-            .appending(component: "\(self.podcastId)")
-    }
-    
-    var preferredUrl: URL {
-        pocastsUrl
-            .appending(component: "Episodes")
-            .appending(component: "\(self.id)")
-            .appendingPathExtension("mp3")
     }
 }
