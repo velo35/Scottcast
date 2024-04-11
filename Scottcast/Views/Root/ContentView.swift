@@ -14,7 +14,6 @@ struct ContentView: View
         NavigationStack {
             PodcastView()
                 .environment(PodcastViewModel())
-                .environment(EpisodePlayer())
                 .navigationTitle("Scottcast")
         }
     }
@@ -23,5 +22,4 @@ struct ContentView: View
 #Preview {
     ContentView()
         .environment(PodcastViewModel())
-        .environment(EpisodePlayer())
 }
