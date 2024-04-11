@@ -14,7 +14,7 @@ struct PodcastView: View
     var body: some View
     {
         VStack {
-            AsyncImage(url: viewModel.podcast?.artworkUrl) { image in
+            AsyncImage(url: viewModel.podcast?.artworkUrl600) { image in
                 image
                     .resizable()
                     .aspectRatio(contentMode: .fit)

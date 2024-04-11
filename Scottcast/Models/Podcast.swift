@@ -12,7 +12,9 @@ struct Podcast: Identifiable
     let id: Int
     let title: String
     let author: String
-    let artworkUrl: URL
+    let artworkUrl30: URL
+    let artworkUrl60: URL
+    let artworkUrl600: URL
     var episodes: [Episode]
     
     subscript(episodeId: Episode.ID) -> Episode? {
@@ -38,7 +40,9 @@ extension Podcast: Decodable
         case id = "collectionId"
         case title = "collectionName"
         case author = "artistName"
-        case artworkUrl = "artworkUrl600"
+        case artworkUrl30 = "artworkUrl30"
+        case artworkUrl60 = "artworkUrl60"
+        case artworkUrl600 = "artworkUrl600"
     }
     
     init(from decoder: Decoder) throws
@@ -50,7 +54,9 @@ extension Podcast: Decodable
         self.id = try podcastContainer.decode(Int.self, forKey: .id)
         self.title = try podcastContainer.decode(String.self, forKey: .title)
         self.author = try podcastContainer.decode(String.self, forKey: .author)
-        self.artworkUrl = try podcastContainer.decode(URL.self, forKey: .artworkUrl)
+        self.artworkUrl30 = try podcastContainer.decode(URL.self, forKey: .artworkUrl30)
+        self.artworkUrl60 = try podcastContainer.decode(URL.self, forKey: .artworkUrl60)
+        self.artworkUrl600 = try podcastContainer.decode(URL.self, forKey: .artworkUrl600)
         
         var episodes = [Episode]()
         while !resultsContainer.isAtEnd {
@@ -68,7 +74,9 @@ extension Podcast
         plist["id"] = self.id
         plist["title"] = self.title
         plist["author"] = self.author
-        plist["artworkUrl"] = self.artworkUrl.absoluteString
+        plist["artworkUrl30"] = self.artworkUrl30.absoluteString
+        plist["artworkUrl60"] = self.artworkUrl60.absoluteString
+        plist["artworkUrl600"] = self.artworkUrl600.absoluteString
         plist["episodes"] = self.episodes.map {
             var plist = [String: Any]()
             plist["id"] = $0.id
@@ -99,10 +107,15 @@ extension Podcast
               let id = plist["id"] as? Int,
               let title = plist["title"] as? String,
               let author = plist["author"] as? String,
-              let artwork = plist["artworkUrl"] as? String,
-              let artworkUrl = URL(string: artwork),
+              let artwork30 = plist["artworkUrl30"] as? String,
+              let artwork30Url = URL(string: artwork30),
+              let artwork60 = plist["artworkUrl60"] as? String,
+              let artwork60Url = URL(string: artwork60),
+              let artwork600 = plist["artworkUrl600"] as? String,
+              let artwork600Url = URL(string: artwork600),
               let episodesList = plist["episodes"] as? [[String: Any]]
         else { throw DeserializationError.plist }
+        
         let episodes = episodesList.compactMap{ plist -> Episode? in
             guard let id = plist["id"] as? Int,
                   let podcastId = plist["podcastId"] as? Int,
@@ -131,6 +144,15 @@ extension Podcast
                 totalBytes: totalBytes
             )
         }
-        return Podcast(id: id, title: title, author: author, artworkUrl: artworkUrl, episodes: episodes)
+        
+        return Podcast(
+            id: id, 
+            title: title,
+            author: author,
+            artworkUrl30: artwork30Url,
+            artworkUrl60: artwork60Url,
+            artworkUrl600: artwork600Url,
+            episodes: episodes
+        )
     }
 }

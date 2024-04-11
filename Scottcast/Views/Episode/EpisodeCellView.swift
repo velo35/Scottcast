@@ -42,7 +42,7 @@ struct EpisodeCellView: View
                 viewModel.pause()
             }
         } label: {
-            Image(systemName: viewModel.isPlaying ? "pause.circle" : "play.circle")
+            Image(systemName: viewModel.isPlaying && viewModel.episode == episode ? "pause.circle" : "play.circle")
                 .imageScale(.large)
         }
         .buttonStyle(.plain)

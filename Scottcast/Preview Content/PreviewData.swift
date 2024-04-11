@@ -21,10 +21,12 @@ extension Podcast
 extension Episode
 {
     static let mock = {
-        let trackPath = Bundle.main.path(forResource: "hh_track.json", ofType: nil)!
-        let data = (try! String(contentsOfFile: trackPath)).data(using: .utf8)!
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        return try! decoder.decode(Episode.self, from: data)
+        // GRAM 224. Oraciones condicionales con el indicativo
+        Podcast.mock.episodes.first(where: { $0.id == 1000651283182})!
+    }()
+    
+    static let mock2 = {
+        // LaInfancia
+        Podcast.mock.episodes.first(where: { $0.id == 1000651065168})!
     }()
 }
