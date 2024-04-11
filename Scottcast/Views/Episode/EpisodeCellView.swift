@@ -33,17 +33,16 @@ struct EpisodeCellView: View
     var playPauseButton: some View
     {
         Button {
-            let episodePlayer = EpisodePlayer.shared
-            episodePlayer.episode = episode
+            viewModel.episode = episode
             
-            if !episodePlayer.isPlaying {
-                episodePlayer.play()
+            if !viewModel.isPlaying {
+                viewModel.play()
             }
             else {
-                episodePlayer.pause()
+                viewModel.pause()
             }
         } label: {
-            Image(systemName: EpisodePlayer.shared.isPlaying ? "pause.circle" : "play.circle")
+            Image(systemName: viewModel.isPlaying ? "pause.circle" : "play.circle")
                 .imageScale(.large)
         }
         .buttonStyle(.plain)

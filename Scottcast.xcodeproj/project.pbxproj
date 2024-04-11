@@ -22,6 +22,7 @@
 		BEAA63862BBE2BC400FFCA8D /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA63852BBE2BC400FFCA8D /* Episode.swift */; };
 		BEAA63882BBE2D8C00FFCA8D /* hh_track.json in Resources */ = {isa = PBXBuildFile; fileRef = BEAA63872BBE2D8C00FFCA8D /* hh_track.json */; };
 		BEAA63902BBE2DA900FFCA8D /* ScottcastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA638F2BBE2DA900FFCA8D /* ScottcastTests.swift */; };
+		BECE30F62BC7458200764EC4 /* EpisodePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECE30F52BC7458200764EC4 /* EpisodePlayerView.swift */; };
 		BEEAA2F22BC0874000AFA73A /* EpisodePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEEAA2F12BC0874000AFA73A /* EpisodePlayer.swift */; };
 /* End PBXBuildFile section */
 
@@ -53,6 +54,7 @@
 		BEAA63872BBE2D8C00FFCA8D /* hh_track.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = hh_track.json; sourceTree = "<group>"; };
 		BEAA638D2BBE2DA900FFCA8D /* ScottcastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScottcastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEAA638F2BBE2DA900FFCA8D /* ScottcastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScottcastTests.swift; sourceTree = "<group>"; };
+		BECE30F52BC7458200764EC4 /* EpisodePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlayerView.swift; sourceTree = "<group>"; };
 		BEEAA2F12BC0874000AFA73A /* EpisodePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +123,7 @@
 			isa = PBXGroup;
 			children = (
 				BE81D02A2BBF250300ED94C3 /* PodcastView.swift */,
+				BECE30F52BC7458200764EC4 /* EpisodePlayerView.swift */,
 			);
 			path = Podcast;
 			sourceTree = "<group>";
@@ -315,6 +318,7 @@
 				BE81D02B2BBF250300ED94C3 /* PodcastView.swift in Sources */,
 				BE81D0302BBF28AC00ED94C3 /* EpisodeCellView.swift in Sources */,
 				BEAA63842BBE2BBB00FFCA8D /* Podcast.swift in Sources */,
+				BECE30F62BC7458200764EC4 /* EpisodePlayerView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,7 +12,6 @@ struct ScottcastApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environment(PodcastViewModel())
         }
     }
 }

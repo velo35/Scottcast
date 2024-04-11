@@ -10,6 +10,7 @@ import SwiftUI
 struct PodcastView: View 
 {
     @Environment(PodcastViewModel.self) var viewModel
+    @Environment(EpisodePlayer.self) var episodePlayer
     
     var body: some View
     {
@@ -35,6 +36,10 @@ struct PodcastView: View
                     EpisodeCellView(episode: episode)
                 }
             }
+            
+            if let episode = viewModel.episode {
+                EpisodePlayerView(episode: episode)
+            }
         }
     }
 }
@@ -42,4 +47,5 @@ struct PodcastView: View
 #Preview {
     PodcastView()
         .environment(PodcastViewModel())
+        .environment(EpisodePlayer())
 }
