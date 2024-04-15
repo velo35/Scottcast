@@ -38,6 +38,7 @@
 
 /* Begin PBXFileReference section */
 		BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewModel.swift; sourceTree = "<group>"; };
+		BE59002A2BCDB1F600EEA72A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		BE81D0242BBF1E6500ED94C3 /* PodcastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewModel.swift; sourceTree = "<group>"; };
 		BE81D0272BBF1EEC00ED94C3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BE81D02A2BBF250300ED94C3 /* PodcastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastView.swift; sourceTree = "<group>"; };
@@ -156,6 +157,7 @@
 		BEAA63662BBE2B4700FFCA8D = {
 			isa = PBXGroup;
 			children = (
+				BE59002A2BCDB1F600EEA72A /* TestPlan.xctestplan */,
 				BEAA63712BBE2B4700FFCA8D /* Scottcast */,
 				BEAA638E2BBE2DA900FFCA8D /* ScottcastTests */,
 				BEAA63702BBE2B4700FFCA8D /* Products */,

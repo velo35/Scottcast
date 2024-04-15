@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "E5BD4E3C-EB1B-4F63-A420-6A9F1DC6B519",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "testTimeoutsEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Scottcast.xcodeproj",
+        "identifier" : "BEAA638C2BBE2DA900FFCA8D",
+        "name" : "ScottcastTests"
+      }
+    }
+  ],
+  "version" : 1
+}

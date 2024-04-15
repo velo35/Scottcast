@@ -34,11 +34,8 @@ final class ScottcastTests: XCTestCase {
         // Any test you write for XCTest can be annotated as throws and async.
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-        let trackPath = Bundle.main.path(forResource: "hh_track.json", ofType: nil)!
-        let data = (try String(contentsOfFile: trackPath)).data(using: .utf8)!
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        let episode = try decoder.decode(Episode.self, from: data)
+        let podcast = Podcast.mock
+        let episode = podcast.episodes[0]
         
         XCTAssertEqual(episode.id, firstEpisode.id)
         XCTAssertEqual(episode.podcastId, firstEpisode.podcastId)
@@ -50,16 +47,11 @@ final class ScottcastTests: XCTestCase {
     }
     
     func testPodcastDecode() throws {
-        let pocastPath = Bundle.main.path(forResource: "hh_itunes.json", ofType: nil)!
-        let data = (try String(contentsOfFile: pocastPath)).data(using: .utf8)!
-        let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
-        
-        let podcast = try decoder.decode(Podcast.self, from: data)
+        let podcast = Podcast.mock
         XCTAssertEqual(podcast.id, 1201483158)
         XCTAssertEqual(podcast.title, "Podcast diario para aprender español - Learn Spanish Daily Podcast")
         XCTAssertEqual(podcast.author, "Hoy Hablamos")
-        XCTAssertEqual(podcast.artworkUrl, URL(string: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/600x600bb.jpg")!)
+        XCTAssertEqual(podcast.artworkUrl600, URL(string: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/600x600bb.jpg")!)
         
         let episode = podcast.episodes[0]
         XCTAssertEqual(episode.id, firstEpisode.id)
