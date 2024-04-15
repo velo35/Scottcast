@@ -10,18 +10,16 @@ import SwiftUI
 struct EpisodeCellView: View
 {
     @Environment(PodcastViewModel.self) var viewModel
+    @State private var downloadViewModel: DownloadViewModel?
     
     let episode: Episode
     
     var downloadButton: some View
     {
         Button {
+            downloadViewModel = viewModel.download(episode: episode)
             Task {
-                do {
-                    try await viewModel.download(episode: episode)
-                } catch {
-                    print(error.localizedDescription)
-                }
+                await downloadViewModel?.begin()
             }
         } label: {
             Image(systemName: "arrow.down.circle")
@@ -61,8 +59,8 @@ struct EpisodeCellView: View
                     downloadButton
                 }
                 
-                if episode.isDownloading {
-                    ProgressView(value: episode.downloadProgress)
+                if let downloadViewModel, downloadViewModel.isDownloading {
+                    ProgressView(value: downloadViewModel.downloadProgress)
                 }
             }
             .padding(6)

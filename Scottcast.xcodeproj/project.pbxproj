@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE5900292BCD7CCC00EEA72A /* DownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */; };
 		BE81D0252BBF1E6500ED94C3 /* PodcastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D0242BBF1E6500ED94C3 /* PodcastViewModel.swift */; };
 		BE81D0282BBF1EEC00ED94C3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D0272BBF1EEC00ED94C3 /* NetworkService.swift */; };
 		BE81D02B2BBF250300ED94C3 /* PodcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D02A2BBF250300ED94C3 /* PodcastView.swift */; };
@@ -36,6 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewModel.swift; sourceTree = "<group>"; };
 		BE81D0242BBF1E6500ED94C3 /* PodcastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewModel.swift; sourceTree = "<group>"; };
 		BE81D0272BBF1EEC00ED94C3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BE81D02A2BBF250300ED94C3 /* PodcastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastView.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				BE81D0242BBF1E6500ED94C3 /* PodcastViewModel.swift */,
+				BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */,
 			);
 			path = "View Models";
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE81D02D2BBF254000ED94C3 /* PreviewData.swift in Sources */,
+				BE5900292BCD7CCC00EEA72A /* DownloadViewModel.swift in Sources */,
 				BE81D0252BBF1E6500ED94C3 /* PodcastViewModel.swift in Sources */,
 				BEAA63752BBE2B4700FFCA8D /* ContentView.swift in Sources */,
 				BEA191CC2BC892C00030C1F6 /* MovingTextView.swift in Sources */,

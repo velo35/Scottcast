@@ -53,27 +53,28 @@ class PodcastViewModel: NSObject
         }
     }
     
-    @MainActor
-    func download(episode: Episode) async throws
+    
+    func download(episode: Episode) -> DownloadViewModel
     {
-        let download = Download(episode: episode)
-        
-        podcast?[episode.id]?.isDownloading = true
-        for await event in download.events {
-            switch event {
-                case let .progress(totalBytesWritten, totalBytesExpectedToWrite):
-                    podcast?[episode.id]?.updateProgress(currentBytes: totalBytesWritten, totalBytes: totalBytesExpectedToWrite)
-                case .finished:
-                    podcast?[episode.id]?.isDownloaded = true
-                case .error:
-                    print("failed!")
+        let vm = DownloadViewModel(episode: episode)
+        let _ = withObservationTracking {
+            vm.succeeded
+        } onChange: {
+            if vm.succeeded {
+                self.podcast?[episode.id]?.isDownloaded = true
+            }
+            
+            if let podcast = self.podcast {
+                do {
+                    let serialized = try podcast.serialize()
+                    try serialized.write(to: self.podcastUrl, options: .atomic)
+                } catch {
+                    print(error.localizedDescription)
+                }
             }
         }
-        podcast?[episode.id]?.isDownloading = false
-        if let podcast {
-            let serialized = try podcast.serialize()
-            try serialized.write(to: podcastUrl, options: .atomic)
-        }
+        
+        return vm
     }
 }
 

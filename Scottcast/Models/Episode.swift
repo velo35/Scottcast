@@ -17,20 +17,6 @@ struct Episode: Identifiable, Equatable
     let durationMillis: Int
     let url: URL
     var isDownloaded = false
-    
-    var isDownloading = false
-    var currentBytes: Int64 = 0
-    var totalBytes: Int64 = 0
-    
-    var downloadProgress: Double {
-        self.totalBytes > 0 ? Double(self.currentBytes) / Double(self.totalBytes) : 0.0
-    }    
-    
-    mutating func updateProgress(currentBytes: Int64, totalBytes: Int64)
-    {
-        self.currentBytes = currentBytes
-        self.totalBytes = totalBytes
-    }
 }
 
 extension Episode
