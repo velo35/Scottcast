@@ -60,16 +60,18 @@ class PodcastViewModel: NSObject
         let _ = withObservationTracking {
             vm.succeeded
         } onChange: {
-            if vm.succeeded {
-                self.podcast?[episode.id]?.isDownloaded = true
-            }
-            
-            if let podcast = self.podcast {
-                do {
-                    let serialized = try podcast.serialize()
-                    try serialized.write(to: self.podcastUrl, options: .atomic)
-                } catch {
-                    print(error.localizedDescription)
+            DispatchQueue.main.async {
+                if vm.succeeded {
+                    self.podcast?[episode.id]?.isDownloaded = true
+                }
+                
+                if let podcast = self.podcast {
+                    do {
+                        let serialized = try podcast.serialize()
+                        try serialized.write(to: self.podcastUrl, options: .atomic)
+                    } catch {
+                        print(error.localizedDescription)
+                    }
                 }
             }
         }
