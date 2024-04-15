@@ -13,6 +13,7 @@
 		BE81D02D2BBF254000ED94C3 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D02C2BBF254000ED94C3 /* PreviewData.swift */; };
 		BE81D0302BBF28AC00ED94C3 /* EpisodeCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D02F2BBF28AC00ED94C3 /* EpisodeCellView.swift */; };
 		BE81D0332BBF2D4C00ED94C3 /* Download.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D0322BBF2D4C00ED94C3 /* Download.swift */; };
+		BEA191CC2BC892C00030C1F6 /* MovingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA191CB2BC892C00030C1F6 /* MovingTextView.swift */; };
 		BEAA63732BBE2B4700FFCA8D /* ScottcastApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA63722BBE2B4700FFCA8D /* ScottcastApp.swift */; };
 		BEAA63752BBE2B4700FFCA8D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA63742BBE2B4700FFCA8D /* ContentView.swift */; };
 		BEAA63772BBE2B4800FFCA8D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BEAA63762BBE2B4800FFCA8D /* Assets.xcassets */; };
@@ -41,6 +42,7 @@
 		BE81D02C2BBF254000ED94C3 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
 		BE81D02F2BBF28AC00ED94C3 /* EpisodeCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodeCellView.swift; sourceTree = "<group>"; };
 		BE81D0322BBF2D4C00ED94C3 /* Download.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Download.swift; sourceTree = "<group>"; };
+		BEA191CB2BC892C00030C1F6 /* MovingTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovingTextView.swift; sourceTree = "<group>"; };
 		BEAA636F2BBE2B4700FFCA8D /* Scottcast.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scottcast.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEAA63722BBE2B4700FFCA8D /* ScottcastApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScottcastApp.swift; sourceTree = "<group>"; };
 		BEAA63742BBE2B4700FFCA8D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 		BE81D0202BBF1DC900ED94C3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BEA191CA2BC8929E0030C1F6 /* Components */,
 				BE81D02E2BBF289800ED94C3 /* Episode */,
 				BE81D0292BBF24F500ED94C3 /* Podcast */,
 				BE81D0222BBF1DDB00ED94C3 /* Root */,
@@ -118,7 +121,6 @@
 			isa = PBXGroup;
 			children = (
 				BE81D02A2BBF250300ED94C3 /* PodcastView.swift */,
-				BECE30F52BC7458200764EC4 /* EpisodePlayerView.swift */,
 			);
 			path = Podcast;
 			sourceTree = "<group>";
@@ -137,6 +139,15 @@
 				BE81D0322BBF2D4C00ED94C3 /* Download.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		BEA191CA2BC8929E0030C1F6 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				BECE30F52BC7458200764EC4 /* EpisodePlayerView.swift */,
+				BEA191CB2BC892C00030C1F6 /* MovingTextView.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		BEAA63662BBE2B4700FFCA8D = {
@@ -303,6 +314,7 @@
 				BE81D02D2BBF254000ED94C3 /* PreviewData.swift in Sources */,
 				BE81D0252BBF1E6500ED94C3 /* PodcastViewModel.swift in Sources */,
 				BEAA63752BBE2B4700FFCA8D /* ContentView.swift in Sources */,
+				BEA191CC2BC892C00030C1F6 /* MovingTextView.swift in Sources */,
 				BE81D0332BBF2D4C00ED94C3 /* Download.swift in Sources */,
 				BEAA63862BBE2BC400FFCA8D /* Episode.swift in Sources */,
 				BEAA63732BBE2B4700FFCA8D /* ScottcastApp.swift in Sources */,

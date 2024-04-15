@@ -17,20 +17,16 @@ struct EpisodePlayerView: View
     {
         HStack {
             AsyncImage(url: viewModel.podcast?.artworkUrl60) { image in
-                if 1 == 1 {
-                    image
-                        .resizable()
-                } else {
-                    Color.blue
-                }
+                image
+                    .resizable()
             } placeholder: {
                 ProgressView()
             }
             .aspectRatio(contentMode: .fit)
             
-            VStack {
-                Text(episode.title)
-                    .lineLimit(1)
+            VStack(alignment: .leading) {
+//                Text(episode.title)
+                MovingTextView(text: episode.title)
                     .mask {
                         LinearGradient(
                             stops: [
@@ -40,8 +36,10 @@ struct EpisodePlayerView: View
                             startPoint: .leading,
                             endPoint: .trailing
                         )
-//                        LinearGradient(colors: [.white, .black.opacity(0)], startPoint: .leading, endPoint: .trailing)
                     }
+                
+                Text(episode.date.formatted(date: .abbreviated, time: .omitted))
+                    .font(.subheadline)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             
