@@ -25,23 +25,11 @@ struct EpisodePlayerView: View
             .aspectRatio(contentMode: .fit)
             
             VStack(alignment: .leading) {
-//                Text(episode.title)
                 MovingTextView(text: episode.title)
-                    .mask {
-                        LinearGradient(
-                            stops: [
-                                Gradient.Stop(color: .white, location: 0.75),
-                                Gradient.Stop(color: .white.opacity(0), location: 1)
-                            ],
-                            startPoint: .leading,
-                            endPoint: .trailing
-                        )
-                    }
                 
                 Text(episode.date.formatted(date: .abbreviated, time: .omitted))
                     .font(.subheadline)
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
             
             Image(systemName: "play.fill")
         }

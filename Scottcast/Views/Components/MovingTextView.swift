@@ -12,43 +12,61 @@ class MovingText: UIView
     let first = UILabel()
     let second = UILabel()
     
-    var timer: Timer?
+    var startTimer: Timer?
+    var animationTimer: Timer?
     
-    init(text: String)
+    let gap = 20.0
+    
+    convenience init(text: String)
     {
-        super.init(frame: .zero)
+        self.init(frame: .zero)
+        
         for label in [first, second] {
             label.text = text
             label.translatesAutoresizingMaskIntoConstraints = false
             label.sizeToFit()
-            self.addSubview(label)
         }
-        second.frame.origin.x = first.frame.size.width
-        
-        self.start()
+        self.addSubview(self.first)
+        self.clipsToBounds = true
     }
     
-    func start()
+    var text: String
     {
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0 / 30.0, repeats: true) { [unowned self] timer in
-//            print("start \(first.frame.width), \(self.frame.width)")
-            self.bounds.origin.x = (self.bounds.origin.x + 3).truncatingRemainder(dividingBy: first.frame.width)
-//            if first.frame.width > self.frame.width {
-//                second.isHidden = false
-//            }
-//            else {
-//                self.bounds.origin.x = 0
-//                second.isHidden = true
-//            }
+        get {
+            self.first.text ?? ""
+        }
+        set {
+            for label in [first, second] {
+                label.text = newValue
+                label.sizeToFit()
+            }
+            self.update()
         }
     }
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
+    func update()
+    {
+        self.startTimer?.invalidate()
+        self.animationTimer?.invalidate()
+        
+        if self.frame.width < first.frame.width {
+            self.startTimer = Timer.scheduledTimer(withTimeInterval: 2, repeats: false) { [unowned self] _ in
+                self.animationTimer = Timer.scheduledTimer(withTimeInterval: 1.0 / 30.0, repeats: true) { [unowned self] _ in
+                    self.bounds.origin.x = (self.bounds.origin.x + 1).truncatingRemainder(dividingBy: self.first.frame.width + self.gap)
+                }
+            }
+            
+            self.addSubview(self.second)
+            self.second.frame.origin.x = self.first.frame.size.width + self.gap
+        }
+        else {
+            self.mask = nil
+            self.second.removeFromSuperview()
+        }
     }
 }
 
-struct MovingTextView: UIViewRepresentable
+struct _MovingTextView: UIViewRepresentable
 {
     let text: String
     
@@ -59,17 +77,42 @@ struct MovingTextView: UIViewRepresentable
     
     func updateUIView(_ uiView: MovingText, context: Context)
     {
-        
+        uiView.text = text
     }
     
     func sizeThatFits(_ proposal: ProposedViewSize, uiView: MovingText, context: Context) -> CGSize?
     {
         guard let width = proposal.width, !width.isInfinite && !width.isZero else { return nil }
-        print("whooo \(proposal)")
-        var frame = uiView.frame
-        frame.size.width = width
-        uiView.frame = frame
-        return CGSize(width: width, height: uiView.first.frame.height)
+        let height = uiView.first.frame.height
+        uiView.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
+        uiView.update()
+        return CGSize(width: width, height: height)
+    }
+    
+    static func dismantleUIView(_ uiView: MovingText, coordinator: ())
+    {
+        uiView.startTimer?.invalidate()
+        uiView.animationTimer?.invalidate()
+    }
+}
+
+struct MovingTextView: View
+{
+    let text: String
+    
+    var body: some View
+    {
+        _MovingTextView(text: text)
+            .mask {
+                LinearGradient(
+                    stops: [
+                        .init(color: .white, location: 0.75),
+                        .init(color: .clear, location: 1)
+                    ],
+                    startPoint: .leading,
+                    endPoint: .trailing
+                )
+            }
     }
 }
 
