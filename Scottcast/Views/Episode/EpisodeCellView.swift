@@ -31,7 +31,9 @@ struct EpisodeCellView: View
     var playPauseButton: some View
     {
         Button {
-            viewModel.episode = episode
+            withAnimation {
+                viewModel.episode = episode                
+            }
             
             if !viewModel.isPlaying {
                 viewModel.play()

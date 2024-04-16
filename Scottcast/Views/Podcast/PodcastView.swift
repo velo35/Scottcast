@@ -38,6 +38,7 @@ struct PodcastView: View
             
             if let episode = viewModel.episode {
                 EpisodePlayerView(episode: episode)
+                    .transition(.move(edge: .bottom))
             }
         }
     }
