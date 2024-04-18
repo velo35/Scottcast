@@ -12,10 +12,13 @@ struct EpisodePlayerView: View
     @Environment(PodcastViewModel.self) var viewModel
     
     let episode: Episode
+    @State private var isCompact = true
     
     var body: some View
     {
-        HStack {
+        let layout = isCompact ? AnyLayout(HStackLayout()) : AnyLayout(VStackLayout())
+        
+        layout {
             AsyncImage(url: viewModel.podcast?.artworkUrl60) { image in
                 image
                     .resizable()
@@ -35,8 +38,15 @@ struct EpisodePlayerView: View
         }
         .padding(.horizontal)
         .padding(.vertical, 4)
-        .frame(maxWidth: .infinity)
-        .frame(height: 44)
+        .frame(maxWidth: .infinity, maxHeight: isCompact ? 44 : .infinity)
+        .background(.white)
+        .onTapGesture {
+            if isCompact {
+                withAnimation {
+                    isCompact = false
+                }
+            }
+        }
     }
 }
 

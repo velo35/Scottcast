@@ -9,12 +9,20 @@ import SwiftUI
 
 struct ContentView: View 
 {
+    @Environment(PodcastViewModel.self) var viewModel
+    
     var body: some View
     {
         NavigationStack {
-            PodcastView()
-                .environment(PodcastViewModel())
-                .navigationTitle("Scottcast")
+            ZStack(alignment: .bottom) {
+                PodcastView()
+                
+                if let episode = viewModel.episode {
+                    EpisodePlayerView(episode: episode)
+                        .transition(.move(edge: .bottom))
+                }
+            }
+            .navigationTitle("Scottcast")
         }
     }
 }

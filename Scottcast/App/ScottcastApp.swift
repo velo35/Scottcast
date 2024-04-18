@@ -8,10 +8,13 @@
 import SwiftUI
 
 @main
-struct ScottcastApp: App {
-    var body: some Scene {
+struct ScottcastApp: App 
+{
+    var body: some Scene
+    {
         WindowGroup {
             ContentView()
+                .environment(PodcastViewModel())
         }
     }
 }
