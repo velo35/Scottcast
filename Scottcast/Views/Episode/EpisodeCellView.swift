@@ -28,26 +28,6 @@ struct EpisodeCellView: View
         .buttonStyle(.plain)
     }
     
-    var playPauseButton: some View
-    {
-        Button {
-            withAnimation {
-                viewModel.episode = episode                
-            }
-            
-            if !viewModel.isPlaying {
-                viewModel.play()
-            }
-            else {
-                viewModel.pause()
-            }
-        } label: {
-            Image(systemName: viewModel.isPlaying && viewModel.episode == episode ? "pause.circle" : "play.circle")
-                .imageScale(.large)
-        }
-        .buttonStyle(.plain)
-    }
-    
     var body: some View
     {
         VStack(alignment: .leading, spacing: 4) {
@@ -55,7 +35,7 @@ struct EpisodeCellView: View
             
             HStack {
                 if episode.isDownloaded {
-                    playPauseButton
+                    PlayPauseButton(episode: episode)
                 }
                 else {
                     downloadButton

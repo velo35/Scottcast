@@ -34,7 +34,7 @@ struct EpisodePlayerView: View
                     .font(.subheadline)
             }
             
-            Image(systemName: "play.fill")
+            PlayPauseButton(episode: episode)
         }
         .padding(.horizontal)
         .padding(.vertical, 4)
