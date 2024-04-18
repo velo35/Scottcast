@@ -29,6 +29,18 @@ extension Episode
             .appending(component: "\(self.id)")
             .appendingPathExtension("mp3")
     }
+    
+    private static let formatter = {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute, .second]
+        formatter.unitsStyle = .positional
+        return formatter
+    }()
+    
+    var duration: String
+    {
+        Episode.formatter.string(from: TimeInterval(Double(self.durationMillis) / 1000.0)) ?? "0:00"
+    }
 }
 
 extension Episode: Decodable

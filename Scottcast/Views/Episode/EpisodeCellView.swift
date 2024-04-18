@@ -41,6 +41,8 @@ struct EpisodeCellView: View
                     downloadButton
                 }
                 
+                Text(episode.duration)
+                
                 if let downloadViewModel, downloadViewModel.isDownloading {
                     ProgressView(value: downloadViewModel.downloadProgress)
                 }
