@@ -34,6 +34,10 @@ struct EpisodePlayerView: View
                     .font(.subheadline)
             }
             
+            if !isCompact {
+                Text(Episode.duration(from: viewModel.elapsed))
+            }
+            
             PlayPauseButton(episode: episode)
         }
         .padding(.horizontal)

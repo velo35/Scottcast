@@ -18,11 +18,15 @@ class PodcastViewModel: NSObject
             guard let episode, episode != oldValue, episode.isDownloaded else { return }
             let player = AVPlayer(url: episode.fileUrl)
             player.addObserver(self, forKeyPath: "rate", options: .new, context: nil)
+            player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: 1), queue: nil) { [unowned self] time in
+                self.elapsed = time.seconds
+            }
             self.player = player
         }
     }
     
     var rate: Float = 0.0
+    var elapsed: TimeInterval = 0
     
     private var player: AVPlayer?
     

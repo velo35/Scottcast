@@ -34,12 +34,18 @@ extension Episode
         let formatter = DateComponentsFormatter()
         formatter.allowedUnits = [.hour, .minute, .second]
         formatter.unitsStyle = .positional
+        formatter.zeroFormattingBehavior = []
         return formatter
     }()
     
+    static func duration(from ti: TimeInterval) -> String
+    {
+        Episode.formatter.string(from: ti) ?? "0:00"
+    }
+    
     var duration: String
     {
-        Episode.formatter.string(from: TimeInterval(Double(self.durationMillis) / 1000.0)) ?? "0:00"
+        Episode.duration(from: Double(self.durationMillis) / 1000.0)
     }
 }
 
