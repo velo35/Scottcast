@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-private struct MovingTextPreference: PreferenceKey
+private struct MovingTextShouldMovePreference: PreferenceKey
 {
     static let defaultValue = false
     static func reduce(value: inout Bool, nextValue: () -> Bool) {}
@@ -45,8 +45,8 @@ struct MovingTextView: View
                                     .onPreferenceChange(MovingTextWidthPreference.self) { value in
                                         textWidth = textProxy.size.width
                                     }
-                                    .preference(key: MovingTextPreference.self, value: proxy.size.width < textProxy.size.width)
-                                    .onPreferenceChange(MovingTextPreference.self) { value in
+                                    .preference(key: MovingTextShouldMovePreference.self, value: proxy.size.width < textProxy.size.width)
+                                    .onPreferenceChange(MovingTextShouldMovePreference.self) { value in
                                         shouldMove = value
                                         offset = CGFloat.zero
                                     }
@@ -61,8 +61,10 @@ struct MovingTextView: View
                             }
                         }
                         .background {
-                            Text(text)
-                                .offset(x: textWidth + gap)
+                            if shouldMove {
+                                Text(text)
+                                    .offset(x: textWidth + gap)                                
+                            }
                         }
                         .offset(x: offset)
                         .animation(.linear(duration: 8).repeatCount(3, autoreverses: false), value: offset)
