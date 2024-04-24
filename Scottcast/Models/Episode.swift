@@ -14,7 +14,7 @@ struct Episode: Identifiable, Equatable
     let title: String
     let date: Date
     let description: String
-    let durationMillis: Int
+    let durationMillis: Int?
     let url: URL
     var isDownloaded = false
 }
@@ -43,9 +43,29 @@ extension Episode
         Episode.formatter.string(from: ti) ?? "0:00"
     }
     
-    var duration: String
+    var duration: String?
     {
-        Episode.duration(from: Double(self.durationMillis) / 1000.0)
+        guard let durationMillis = self.durationMillis else { return nil }
+        return Episode.duration(from: Double(durationMillis) / 1000.0)
+    }
+    
+    var dateSinceNow: String
+    {
+        let components = Calendar.current.dateComponents([.weekOfYear, .day, .hour], from: self.date, to: .now)
+        if let weeks = components.weekOfYear, weeks > 0 {
+            return weeks == 1 ? "1 week ago" : "\(weeks) weeks ago"
+        }
+        else if let days = components.day, days > 0 {
+            return days == 1 ? "1 day ago" : "\(days) days ago"
+        }
+        else if let hours = components.hour, hours > 0 {
+            return hours == 1 ? "1 hour ago" : "\(hours) hours ago"
+        }
+        else if let minutes = components.minute, minutes > 0 {
+            return minutes == 1 ? "1 mimnute ago" : "\(minutes) minutes ago"
+        }
+        
+        return "Just now"
     }
 }
 

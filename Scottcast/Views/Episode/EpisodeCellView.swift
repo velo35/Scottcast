@@ -31,6 +31,8 @@ struct EpisodeCellView: View
     var body: some View
     {
         VStack(alignment: .leading, spacing: 4) {
+            Text(episode.dateSinceNow)
+            
             Text(episode.title)
             
             HStack {
@@ -41,13 +43,14 @@ struct EpisodeCellView: View
                     downloadButton
                 }
                 
-                Text(episode.duration)
+                if let duration = episode.duration {
+                    Text(duration)
+                }
                 
                 if let downloadViewModel, downloadViewModel.isDownloading {
                     ProgressView(value: downloadViewModel.downloadProgress)
                 }
             }
-            .padding(6)
         }
     }
 }
