@@ -9,19 +9,15 @@ import Foundation
 import AVFoundation
 
 @Observable
-class PodcastViewModel: NSObject
+class PodcastViewModel
 {
     private(set) var podcast: Podcast?
     
     var episode: Episode? {
         didSet {
-            guard let episode, episode != oldValue, episode.isDownloaded else { return }
-            let player = AVPlayer(url: episode.fileUrl)
-            player.addObserver(self, forKeyPath: "rate", options: .new, context: nil)
-            player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: 1), queue: nil) { [unowned self] time in
-                self.elapsed = time.seconds
+            if oldValue != self.episode {
+                self.setupPlayer()
             }
-            self.player = player
         }
     }
     
@@ -29,11 +25,10 @@ class PodcastViewModel: NSObject
     var elapsed: TimeInterval = 0
     
     private var player: AVPlayer?
+    private var observations = [NSKeyValueObservation]()
     
-    override init()
+    init()
     {
-        super.init()
-        
         if let data = try? Data(contentsOf: podcastUrl) {
             do {
                 self.podcast = try Podcast.deserialize(data: data)
@@ -94,9 +89,26 @@ extension PodcastViewModel
     }
 }
 
-extension PodcastViewModel
+extension PodcastViewModel // Player
 {
     var isPlaying: Bool { self.rate != 0.0 }
+    
+    func setupPlayer()
+    {
+        guard let episode, episode.isDownloaded else { return }
+        let player = AVPlayer(url: episode.fileUrl)
+        player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: 1), queue: nil) { [unowned self] time in
+            self.elapsed = time.seconds
+        }
+        self.observations = [
+            player.observe(\.rate, options: .new) { player, change in
+                guard let rate = change.newValue else { return }
+                self.rate = rate
+            }
+        ]
+        
+        self.player = player
+    }
     
     func play()
     {
@@ -106,13 +118,5 @@ extension PodcastViewModel
     func pause()
     {
         self.player?.pause()
-    }
-    
-    @objc
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?)
-    {
-        if keyPath == "rate", let rate = change?[.newKey] as? Float {
-            self.rate = rate
-        }
     }
 }
