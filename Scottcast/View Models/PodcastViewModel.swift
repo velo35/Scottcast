@@ -93,6 +93,8 @@ extension PodcastViewModel // Player
 {
     var isPlaying: Bool { self.rate != 0.0 }
     
+    var duration: TimeInterval { self.player?.currentItem?.duration.seconds ?? 0 }
+    
     func setupPlayer()
     {
         guard let episode, episode.isDownloaded else { return }

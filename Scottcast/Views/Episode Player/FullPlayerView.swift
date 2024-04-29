@@ -24,18 +24,39 @@ struct FullPlayerView: View
             }
             .aspectRatio(contentMode: .fit)
             
-            VStack(alignment: .leading) {
-                MovingTextView(text: episode.title)
+            Text(episode.date, format: .dateTime.day().month())
+                .font(.subheadline)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            
+            MovingTextView(text: episode.title)
+            
+            VStack {
+                ProgressView(value: 0)
                 
-                Text(episode.date.formatted(date: .abbreviated, time: .omitted))
-                    .font(.subheadline)
+                HStack {
+                    Text(.seconds(viewModel.elapsed), format: .time(pattern: .minuteSecond))
+                    
+                    Spacer()
+                    
+                    Text("-") + Text(.seconds(viewModel.duration - viewModel.elapsed), format: .time(pattern: .minuteSecond))
+                }
             }
             
-            PlayPauseButton(episode: episode) 
+            
+            Spacer()
+                .frame(height: 30)
+            
+            PlayPauseButton(episode: episode, size: 32)
         }
+        .padding(.horizontal)
     }
 }
 
 #Preview {
-    FullPlayerView(episode: .mock)
+    FullPlayerView(episode: .mock2)
+        .environment(PodcastViewModel())
+        .background {
+            Rectangle()
+                .stroke(lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
+        }
 }
