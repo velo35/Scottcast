@@ -12,45 +12,18 @@ struct EpisodePlayerView: View
     @Environment(PodcastViewModel.self) var viewModel
     
     let episode: Episode
-    @State private var isCompact = true
+    @State private var showFullPlayer = false
     
     var body: some View
     {
-        let layout = isCompact ? AnyLayout(HStackLayout()) : AnyLayout(VStackLayout())
-        
-        layout {
-            AsyncImage(url: viewModel.podcast?.artworkUrl60) { image in
-                image
-                    .resizable()
-            } placeholder: {
-                ProgressView()
+        CompactPlayerView(episode: episode)
+            .background(.white)
+            .onTapGesture {
+                showFullPlayer = true
             }
-            .aspectRatio(contentMode: .fit)
-            
-            VStack(alignment: .leading) {
-                MovingTextView(text: episode.title)
-                
-                Text(episode.date.formatted(date: .abbreviated, time: .omitted))
-                    .font(.subheadline)
+            .sheet(isPresented: $showFullPlayer) {
+                FullPlayerView(episode: episode)
             }
-            
-            if !isCompact {
-                Text(Episode.duration(from: viewModel.elapsed))
-            }
-            
-            PlayPauseButton(episode: episode)
-        }
-        .padding(.horizontal)
-        .padding(.vertical, 4)
-        .frame(maxWidth: .infinity, maxHeight: isCompact ? 44 : .infinity)
-        .background(.white)
-        .onTapGesture {
-            if isCompact {
-                withAnimation {
-                    isCompact = false
-                }
-            }
-        }
     }
 }
 

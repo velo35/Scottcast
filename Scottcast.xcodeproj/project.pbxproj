@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BE09A6E52BD1985F001F3C12 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE09A6E42BD1985F001F3C12 /* PlayPauseButton.swift */; };
 		BE5900292BCD7CCC00EEA72A /* DownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */; };
+		BE5F48B72BE02BFA00EDC8BB /* CompactPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F48B62BE02BFA00EDC8BB /* CompactPlayerView.swift */; };
+		BE5F48B92BE02D0B00EDC8BB /* FullPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F48B82BE02D0B00EDC8BB /* FullPlayerView.swift */; };
 		BE81D0252BBF1E6500ED94C3 /* PodcastViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D0242BBF1E6500ED94C3 /* PodcastViewModel.swift */; };
 		BE81D0282BBF1EEC00ED94C3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D0272BBF1EEC00ED94C3 /* NetworkService.swift */; };
 		BE81D02B2BBF250300ED94C3 /* PodcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D02A2BBF250300ED94C3 /* PodcastView.swift */; };
@@ -41,6 +43,8 @@
 		BE09A6E42BD1985F001F3C12 /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewModel.swift; sourceTree = "<group>"; };
 		BE59002A2BCDB1F600EEA72A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
+		BE5F48B62BE02BFA00EDC8BB /* CompactPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactPlayerView.swift; sourceTree = "<group>"; };
+		BE5F48B82BE02D0B00EDC8BB /* FullPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerView.swift; sourceTree = "<group>"; };
 		BE81D0242BBF1E6500ED94C3 /* PodcastViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastViewModel.swift; sourceTree = "<group>"; };
 		BE81D0272BBF1EEC00ED94C3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BE81D02A2BBF250300ED94C3 /* PodcastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastView.swift; sourceTree = "<group>"; };
@@ -82,7 +86,9 @@
 		BE09A6E62BD1992D001F3C12 /* Episode Player */ = {
 			isa = PBXGroup;
 			children = (
+				BE5F48B62BE02BFA00EDC8BB /* CompactPlayerView.swift */,
 				BECE30F52BC7458200764EC4 /* EpisodePlayerView.swift */,
+				BE5F48B82BE02D0B00EDC8BB /* FullPlayerView.swift */,
 			);
 			path = "Episode Player";
 			sourceTree = "<group>";
@@ -327,6 +333,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE5F48B72BE02BFA00EDC8BB /* CompactPlayerView.swift in Sources */,
 				BE81D02D2BBF254000ED94C3 /* PreviewData.swift in Sources */,
 				BE5900292BCD7CCC00EEA72A /* DownloadViewModel.swift in Sources */,
 				BE09A6E52BD1985F001F3C12 /* PlayPauseButton.swift in Sources */,
@@ -336,6 +343,7 @@
 				BE81D0332BBF2D4C00ED94C3 /* Download.swift in Sources */,
 				BEAA63862BBE2BC400FFCA8D /* Episode.swift in Sources */,
 				BEAA63732BBE2B4700FFCA8D /* ScottcastApp.swift in Sources */,
+				BE5F48B92BE02D0B00EDC8BB /* FullPlayerView.swift in Sources */,
 				BE81D0282BBF1EEC00ED94C3 /* NetworkService.swift in Sources */,
 				BE81D02B2BBF250300ED94C3 /* PodcastView.swift in Sources */,
 				BE81D0302BBF28AC00ED94C3 /* EpisodeCellView.swift in Sources */,
