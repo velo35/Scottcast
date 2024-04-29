@@ -27,7 +27,7 @@ struct PlayPauseButton: View
                 viewModel.pause()
             }
         } label: {
-            Image(systemName: viewModel.isPlaying && viewModel.episode == episode ? "pause.circle" : "play.circle")
+            Image(systemName: viewModel.isPlaying && viewModel.episode == episode ? "pause.fill" : "play.fill")
                 .imageScale(.large)
         }
         .buttonStyle(.plain)

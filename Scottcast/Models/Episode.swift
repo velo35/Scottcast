@@ -30,25 +30,6 @@ extension Episode
             .appendingPathExtension("mp3")
     }
     
-    private static let formatter = {
-        let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.hour, .minute, .second]
-        formatter.unitsStyle = .positional
-        formatter.zeroFormattingBehavior = []
-        return formatter
-    }()
-    
-    static func duration(from ti: TimeInterval) -> String
-    {
-        Episode.formatter.string(from: ti) ?? "0:00"
-    }
-    
-    var duration: String?
-    {
-        guard let durationMillis = self.durationMillis else { return nil }
-        return Episode.duration(from: Double(durationMillis) / 1000.0)
-    }
-    
     var dateSinceNow: String
     {
         let components = Calendar.current.dateComponents([.weekOfYear, .day, .hour], from: self.date, to: .now)

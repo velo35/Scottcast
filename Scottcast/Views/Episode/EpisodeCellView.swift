@@ -32,8 +32,11 @@ struct EpisodeCellView: View
     {
         VStack(alignment: .leading, spacing: 4) {
             Text(episode.dateSinceNow)
+                .font(.subheadline)
             
             Text(episode.title)
+            
+            
             
             HStack {
                 if episode.isDownloaded {
@@ -43,8 +46,8 @@ struct EpisodeCellView: View
                     downloadButton
                 }
                 
-                if let duration = episode.duration {
-                    Text(duration)
+                if let millis = episode.durationMillis {
+                    Text(.milliseconds(millis), format: .time(pattern: .minuteSecond))
                 }
                 
                 if let downloadViewModel, downloadViewModel.isDownloading {
