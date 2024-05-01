@@ -127,4 +127,9 @@ extension PodcastViewModel // Player
         let seek = self.elapsed + amount
         self.player?.seek(to: CMTime(seconds: seek, preferredTimescale: 1))
     }
+    
+    func seek(to seconds: Double)
+    {
+        self.player?.seek(to: CMTime(seconds: seconds, preferredTimescale: 1))
+    }
 }
