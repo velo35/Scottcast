@@ -121,4 +121,10 @@ extension PodcastViewModel // Player
     {
         self.player?.pause()
     }
+    
+    func skip(amount: TimeInterval)
+    {
+        let seek = self.elapsed + amount
+        self.player?.seek(to: CMTime(seconds: seek, preferredTimescale: 1))
+    }
 }

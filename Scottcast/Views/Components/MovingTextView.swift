@@ -51,9 +51,9 @@ struct MovingTextView: View
                                         offset = CGFloat.zero
                                     }
                                     .onChange(of: shouldMove) {
-                                        if shouldMove {
-                                            Task {
-                                                try? await Task.sleep(nanoseconds: 3_000_000_000)
+                                        Task {
+                                            try? await Task.sleep(nanoseconds: 3_000_000_000)
+                                            if shouldMove {
                                                 offset = -(textWidth + gap)
                                             }
                                         }

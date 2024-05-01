@@ -42,11 +42,27 @@ struct FullPlayerView: View
                 }
             }
             
+            Spacer().frame(height: 30)
             
-            Spacer()
-                .frame(height: 30)
-            
-            PlayPauseButton(episode: episode, size: 32)
+            HStack(spacing: 30) {
+                Button {
+                    viewModel.skip(amount: -15)
+                } label: {
+                    Image(systemName: "gobackward.15")
+                        .font(.system(size: 32))
+                }
+                .buttonStyle(.plain)
+                
+                PlayPauseButton(episode: episode, size: 32)
+                
+                Button {
+                    viewModel.skip(amount: 30)
+                } label: {
+                    Image(systemName: "goforward.30")
+                        .font(.system(size: 32))
+                }
+                .buttonStyle(.plain)
+            }
         }
         .padding(.horizontal)
     }
@@ -57,6 +73,6 @@ struct FullPlayerView: View
         .environment(PodcastViewModel())
         .background {
             Rectangle()
-                .stroke(lineWidth: /*@START_MENU_TOKEN@*/1.0/*@END_MENU_TOKEN@*/)
+                .stroke(lineWidth: 1)
         }
 }
