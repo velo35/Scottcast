@@ -6,17 +6,34 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Episode: Identifiable, Equatable
+@Model
+class Episode: Identifiable, Equatable
 {
     let id: Int
     let podcastId: Int
     let title: String
     let date: Date
-    let description: String
+    let details: String
     let durationMillis: Int?
     let url: URL
     var isDownloaded = false
+    
+    let podcast: Podcast
+    
+    init(from info: EpisodeInfo, podcast: Podcast)
+    {
+        self.id = info.id
+        self.podcastId = info.podcastId
+        self.title = info.title
+        self.date = info.date
+        self.details = info.description
+        self.durationMillis = info.durationMillis
+        self.url = info.url
+        
+        self.podcast = podcast
+    }
 }
 
 extension Episode
@@ -50,7 +67,18 @@ extension Episode
     }
 }
 
-extension Episode: Decodable
+struct EpisodeInfo
+{
+    let id: Int
+    let podcastId: Int
+    let title: String
+    let date: Date
+    let description: String
+    let durationMillis: Int?
+    let url: URL
+}
+
+extension EpisodeInfo: Decodable
 {
     enum CodingKeys: String, CodingKey
     {

@@ -25,7 +25,7 @@ struct FullPlayerView: View
     var body: some View
     {
         VStack {
-            AsyncImage(url: viewModel.podcast?.artworkUrl60) { image in
+            AsyncImage(url: episode.podcast.artworkUrl60) { image in
                 image
                     .resizable()
             } placeholder: {
@@ -98,7 +98,7 @@ struct FullPlayerView: View
 }
 
 #Preview {
-    FullPlayerView(episode: .mock2)
+    FullPlayerView(episode: Episode(from: .mock2, podcast: Podcast(from: .mock)))
         .environment(PodcastViewModel())
         .background {
             Rectangle()

@@ -7,11 +7,12 @@
 
 import Foundation
 import AVFoundation
+import SwiftData
 
 @Observable
 class PodcastViewModel
 {
-    private(set) var podcast: Podcast?
+//    private(set) var podcast: Podcast?
     
     var episode: Episode? {
         didSet {
@@ -27,56 +28,21 @@ class PodcastViewModel
     private var player: AVPlayer?
     private var observations = [NSKeyValueObservation]()
     
-    init()
-    {
-        if let data = try? Data(contentsOf: podcastUrl) {
-            do {
-                self.podcast = try Podcast.deserialize(data: data)
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        else {
-            Task {
-                do {
-                    let url = URL(string: "https://itunes.apple.com/lookup?id=1201483158&media=podcast&entity=podcastEpisode")!
-                    let data = try await NetworkService.fetch(url: url)
-                    let decoder = JSONDecoder()
-                    decoder.dateDecodingStrategy = .iso8601
-                    
-                    self.podcast = try decoder.decode(Podcast.self, from: data)
-                } catch {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    
-    func download(episode: Episode) -> DownloadViewModel
-    {
-        let vm = DownloadViewModel(episode: episode)
-        let _ = withObservationTracking {
-            vm.succeeded
-        } onChange: {
-            DispatchQueue.main.async {
-                if vm.succeeded {
-                    self.podcast?[episode.id]?.isDownloaded = true
-                }
-                
-                if let podcast = self.podcast {
-                    do {
-                        let serialized = try podcast.serialize()
-                        try serialized.write(to: self.podcastUrl, options: .atomic)
-                    } catch {
-                        print(error.localizedDescription)
-                    }
-                }
-            }
-        }
-        
-        return vm
-    }
+//    func download(episode: Episode) -> DownloadViewModel
+//    {
+//        let vm = DownloadViewModel(episode: episode)
+//        let _ = withObservationTracking {
+//            vm.succeeded
+//        } onChange: {
+//            DispatchQueue.main.async {
+//                if vm.succeeded {
+//                    self.podcast?[episode.id]?.isDownloaded = true
+//                }
+//            }
+//        }
+//        
+//        return vm
+//    }
 }
 
 extension PodcastViewModel

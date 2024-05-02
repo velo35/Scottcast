@@ -6,8 +6,10 @@
 //
 
 import Foundation
+import SwiftData
 
-struct Podcast: Identifiable
+@Model
+class Podcast: Identifiable
 {
     let id: Int
     let title: String
@@ -15,7 +17,23 @@ struct Podcast: Identifiable
     let artworkUrl30: URL
     let artworkUrl60: URL
     let artworkUrl600: URL
-    var episodes: [Episode]
+    var episodes = [Episode]()
+    
+    var sortedEpisodes: [Episode]
+    {
+        self.episodes.sorted(using: KeyPathComparator(\.date, order: .reverse))
+    }
+    
+    init(from info: PodcastInfo)
+    {
+        self.id = info.id
+        self.title = info.title
+        self.author = info.author
+        self.artworkUrl30 = info.artworkUrl30
+        self.artworkUrl60 = info.artworkUrl60
+        self.artworkUrl600 = info.artworkUrl600
+        self.episodes = info.episodes.map{ Episode(from: $0, podcast: self) }
+    }
     
     subscript(episodeId: Episode.ID) -> Episode? {
         get {
@@ -28,7 +46,18 @@ struct Podcast: Identifiable
     }
 }
 
-extension Podcast: Decodable
+struct PodcastInfo: Identifiable
+{
+    let id: Int
+    let title: String
+    let author: String
+    let artworkUrl30: URL
+    let artworkUrl60: URL
+    let artworkUrl600: URL
+    var episodes: [EpisodeInfo]
+}
+
+extension PodcastInfo: Decodable
 {
     enum ContainerKeys: String, CodingKey
     {
@@ -58,92 +87,10 @@ extension Podcast: Decodable
         self.artworkUrl60 = try podcastContainer.decode(URL.self, forKey: .artworkUrl60)
         self.artworkUrl600 = try podcastContainer.decode(URL.self, forKey: .artworkUrl600)
         
-        var episodes = [Episode]()
+        var episodes = [EpisodeInfo]()
         while !resultsContainer.isAtEnd {
-            episodes.append(try resultsContainer.decode(Episode.self))
+            episodes.append(try resultsContainer.decode(EpisodeInfo.self))
         }
         self.episodes = episodes
-    }
-}
-
-extension Podcast
-{
-    func serialize() throws -> Data
-    {
-        var plist = [String: Any]()
-        plist["id"] = self.id
-        plist["title"] = self.title
-        plist["author"] = self.author
-        plist["artworkUrl30"] = self.artworkUrl30.absoluteString
-        plist["artworkUrl60"] = self.artworkUrl60.absoluteString
-        plist["artworkUrl600"] = self.artworkUrl600.absoluteString
-        plist["episodes"] = self.episodes.map {
-            var plist = [String: Any]()
-            plist["id"] = $0.id
-            plist["podcastId"] = $0.podcastId
-            plist["title"] = $0.title
-            plist["date"] = $0.date
-            plist["description"] = $0.description
-            plist["durationMillis"] = $0.durationMillis
-            plist["url"] = $0.url.absoluteString
-            plist["isDownloaded"] = $0.isDownloaded
-            return plist
-        }
-        
-        return try PropertyListSerialization.data(fromPropertyList: plist, format: .xml, options: .zero)
-    }
-    
-    enum DeserializationError: Error
-    {
-        case plist
-    }
-    
-    static func deserialize(data: Data) throws -> Podcast
-    {
-        guard let plist = try PropertyListSerialization.propertyList(from: data, format: nil) as? [String: Any],
-              let id = plist["id"] as? Int,
-              let title = plist["title"] as? String,
-              let author = plist["author"] as? String,
-              let artwork30 = plist["artworkUrl30"] as? String,
-              let artwork30Url = URL(string: artwork30),
-              let artwork60 = plist["artworkUrl60"] as? String,
-              let artwork60Url = URL(string: artwork60),
-              let artwork600 = plist["artworkUrl600"] as? String,
-              let artwork600Url = URL(string: artwork600),
-              let episodesList = plist["episodes"] as? [[String: Any]]
-        else { throw DeserializationError.plist }
-        
-        let episodes = episodesList.compactMap{ plist -> Episode? in
-            guard let id = plist["id"] as? Int,
-                  let podcastId = plist["podcastId"] as? Int,
-                  let title = plist["title"] as? String,
-                  let date = plist["date"] as? Date,
-                  let description = plist["description"] as? String,
-                  let durationMillis = plist["durationMillis"] as? Int,
-                  let urlStr = plist["url"] as? String,
-                  let url = URL(string: urlStr),
-                  let isDownloaded = plist["isDownloaded"] as? Bool
-            else { return nil }
-            return Episode(
-                id: id,
-                podcastId: podcastId,
-                title: title,
-                date: date,
-                description: description,
-                durationMillis: durationMillis,
-                url: url,
-                isDownloaded: isDownloaded
-            )
-        }
-        
-        return Podcast(
-            id: id, 
-            title: title,
-            author: author,
-            artworkUrl30: artwork30Url,
-            artworkUrl60: artwork60Url,
-            artworkUrl600: artwork600Url,
-            episodes: episodes
-        )
     }
 }

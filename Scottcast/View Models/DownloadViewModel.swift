@@ -33,7 +33,7 @@ class DownloadViewModel
     }
     
     @MainActor
-    func begin() async
+    func download() async
     {
         let download = Download(episode: self.episode)
         
@@ -44,6 +44,7 @@ class DownloadViewModel
                     self.updateProgress(currentBytes: totalBytesWritten, totalBytes: totalBytesExpectedToWrite)
                 case .finished:
                     self.succeeded = true
+                    self.episode.isDownloaded = true
                 case .error:
                     print("failed!")
             }

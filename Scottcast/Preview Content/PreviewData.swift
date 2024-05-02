@@ -7,26 +7,26 @@
 
 import Foundation
 
-extension Podcast
+extension PodcastInfo
 {
     static let mock = {
         let pocastPath = Bundle.main.path(forResource: "hh_itunes.json", ofType: nil)!
         let data = (try! String(contentsOfFile: pocastPath)).data(using: .utf8)!
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        return try! decoder.decode(Podcast.self, from: data)
+        return try! decoder.decode(PodcastInfo.self, from: data)
     }()
 }
 
-extension Episode
+extension EpisodeInfo
 {
     static let mock = {
         // GRAM 224. Oraciones condicionales con el indicativo
-        Podcast.mock.episodes.first(where: { $0.id == 1000651283182})!
+        PodcastInfo.mock.episodes.first(where: { $0.id == 1000651283182})!
     }()
     
     static let mock2 = {
         // LaInfancia
-        Podcast.mock.episodes.first(where: { $0.id == 1000651065168})!
+        PodcastInfo.mock.episodes.first(where: { $0.id == 1000651065168})!
     }()
 }

@@ -43,6 +43,6 @@ struct PlayPauseButton: View
 }
 
 #Preview {
-    PlayPauseButton(episode: .mock, size: 64)
+    PlayPauseButton(episode: Episode(from: .mock, podcast: Podcast(from: .mock)), size: 64)
         .environment(PodcastViewModel())
 }

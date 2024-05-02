@@ -10,6 +10,7 @@ import SwiftUI
 struct EpisodeCellView: View
 {
     @Environment(PodcastViewModel.self) var viewModel
+    
     @State private var downloadViewModel: DownloadViewModel?
     
     let episode: Episode
@@ -17,9 +18,10 @@ struct EpisodeCellView: View
     var downloadButton: some View
     {
         Button {
-            downloadViewModel = viewModel.download(episode: episode)
+            downloadViewModel = DownloadViewModel(episode: self.episode)
             Task {
-                await downloadViewModel?.begin()
+                await downloadViewModel?.download()
+                downloadViewModel = nil
             }
         } label: {
             Image(systemName: "arrow.down.circle")
@@ -35,8 +37,6 @@ struct EpisodeCellView: View
                 .font(.subheadline)
             
             Text(episode.title)
-            
-            
             
             HStack {
                 if episode.isDownloaded {
@@ -59,6 +59,6 @@ struct EpisodeCellView: View
 }
 
 #Preview {
-    EpisodeCellView(episode: .mock)
+    EpisodeCellView(episode: Episode(from: .mock, podcast: Podcast(from: .mock)))
         .environment(PodcastViewModel())
 }

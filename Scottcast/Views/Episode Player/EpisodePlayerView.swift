@@ -17,6 +17,7 @@ struct EpisodePlayerView: View
     var body: some View
     {
         CompactPlayerView(episode: episode)
+            .padding(.horizontal)
             .background(.white)
             .onTapGesture {
                 showFullPlayer = true
@@ -28,7 +29,7 @@ struct EpisodePlayerView: View
 }
 
 #Preview {
-    EpisodePlayerView(episode: .mock)
+    EpisodePlayerView(episode: Episode(from: .mock, podcast: Podcast(from: .mock)))
         .background {
             Rectangle()
                 .stroke(.red, lineWidth: 1)

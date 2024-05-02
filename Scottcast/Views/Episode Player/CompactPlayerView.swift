@@ -9,14 +9,12 @@ import SwiftUI
 
 struct CompactPlayerView: View 
 {
-    @Environment(PodcastViewModel.self) var viewModel
-    
     let episode: Episode
     
     var body: some View
     {
         HStack {
-            AsyncImage(url: viewModel.podcast?.artworkUrl60) { image in
+            AsyncImage(url: episode.podcast.artworkUrl60) { image in
                 image
                     .resizable()
             } placeholder: {
@@ -40,6 +38,5 @@ struct CompactPlayerView: View
 }
 
 #Preview {
-    CompactPlayerView(episode: .mock)
-        .environment(PodcastViewModel())
+    CompactPlayerView(episode: Episode(from: .mock, podcast: Podcast(from: .mock)))
 }
