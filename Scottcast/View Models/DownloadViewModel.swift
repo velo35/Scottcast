@@ -12,10 +12,16 @@ class DownloadViewModel
 {
     let episode: Episode
     
-    var isDownloading = false
     var currentBytes: Int64 = 0
     var totalBytes: Int64 = 0
     var succeeded = false
+    
+    enum Status
+    {
+        case initial, downloading, success, failed
+    }
+    
+    var status = Status.initial
     
     var downloadProgress: Double {
         self.totalBytes > 0 ? Double(self.currentBytes) / Double(self.totalBytes) : 0.0
@@ -37,18 +43,16 @@ class DownloadViewModel
     {
         let download = Download(episode: self.episode)
         
-        self.isDownloading = true
+        self.status = .downloading
         for await event in download.events {
             switch event {
                 case let .progress(totalBytesWritten, totalBytesExpectedToWrite):
                     self.updateProgress(currentBytes: totalBytesWritten, totalBytes: totalBytesExpectedToWrite)
                 case .finished:
-                    self.succeeded = true
-                    self.episode.isDownloaded = true
+                    self.status = .success
                 case .error:
-                    print("failed!")
+                    self.status = .failed
             }
         }
-        self.isDownloading = false
     }
 }

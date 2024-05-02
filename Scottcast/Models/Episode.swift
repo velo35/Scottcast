@@ -18,8 +18,6 @@ class Episode: Identifiable, Equatable
     let details: String
     let durationMillis: Int?
     let url: URL
-    var isDownloaded = false
-    
     let podcast: Podcast
     
     init(from info: EpisodeInfo, podcast: Podcast)
@@ -45,6 +43,11 @@ extension Episode
             .appending(component: "Episodes")
             .appending(component: "\(self.id)")
             .appendingPathExtension("mp3")
+    }
+    
+    var isDownloaded: Bool
+    {
+        FileManager.default.fileExists(atPath: self.fileUrl.path())
     }
     
     var dateSinceNow: String

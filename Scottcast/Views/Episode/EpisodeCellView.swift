@@ -50,7 +50,7 @@ struct EpisodeCellView: View
                     Text(.milliseconds(millis), format: .time(pattern: .minuteSecond))
                 }
                 
-                if let downloadViewModel, downloadViewModel.isDownloading {
+                if let downloadViewModel {
                     ProgressView(value: downloadViewModel.downloadProgress)
                 }
             }
