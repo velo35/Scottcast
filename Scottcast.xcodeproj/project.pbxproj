@@ -27,6 +27,7 @@
 		BEAA63862BBE2BC400FFCA8D /* Episode.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA63852BBE2BC400FFCA8D /* Episode.swift */; };
 		BEAA63902BBE2DA900FFCA8D /* ScottcastTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAA638F2BBE2DA900FFCA8D /* ScottcastTests.swift */; };
 		BECE30F62BC7458200764EC4 /* EpisodePlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BECE30F52BC7458200764EC4 /* EpisodePlayerView.swift */; };
+		BEFEE41F2BEACD19007F2227 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEFEE41E2BEACD19007F2227 /* LibraryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		BEAA638D2BBE2DA900FFCA8D /* ScottcastTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ScottcastTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BEAA638F2BBE2DA900FFCA8D /* ScottcastTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScottcastTests.swift; sourceTree = "<group>"; };
 		BECE30F52BC7458200764EC4 /* EpisodePlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlayerView.swift; sourceTree = "<group>"; };
+		BEFEE41E2BEACD19007F2227 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,6 +101,7 @@
 				BEA191CA2BC8929E0030C1F6 /* Components */,
 				BE81D02E2BBF289800ED94C3 /* Episode */,
 				BE09A6E62BD1992D001F3C12 /* Episode Player */,
+				BEFEE41D2BEACD0B007F2227 /* Library */,
 				BE81D0292BBF24F500ED94C3 /* Podcast */,
 				BE81D0222BBF1DDB00ED94C3 /* Root */,
 			);
@@ -232,6 +235,14 @@
 			path = ScottcastTests;
 			sourceTree = "<group>";
 		};
+		BEFEE41D2BEACD0B007F2227 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				BEFEE41E2BEACD19007F2227 /* LibraryView.swift */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -342,6 +353,7 @@
 				BEA191CC2BC892C00030C1F6 /* MovingTextView.swift in Sources */,
 				BE81D0332BBF2D4C00ED94C3 /* Download.swift in Sources */,
 				BEAA63862BBE2BC400FFCA8D /* Episode.swift in Sources */,
+				BEFEE41F2BEACD19007F2227 /* LibraryView.swift in Sources */,
 				BEAA63732BBE2B4700FFCA8D /* ScottcastApp.swift in Sources */,
 				BE5F48B92BE02D0B00EDC8BB /* FullPlayerView.swift in Sources */,
 				BE81D0282BBF1EEC00ED94C3 /* NetworkService.swift in Sources */,
