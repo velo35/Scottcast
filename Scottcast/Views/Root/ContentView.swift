@@ -17,6 +17,11 @@ struct ContentView: View
                 .tabItem {
                     Label("Library", systemImage: "books.vertical")
                 }
+            
+            SearchView()
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
         }
     }
 }
