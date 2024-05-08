@@ -10,7 +10,7 @@ import XCTest
 
 final class ScottcastTests: XCTestCase {
     
-    let firstEpisode = Episode(
+    let firstEpisode = EpisodeInfo(
         id: 1000651283182,
         podcastId: 1201483158,
         title: "GRAM 224. Oraciones condicionales con el indicativo",
@@ -34,7 +34,7 @@ final class ScottcastTests: XCTestCase {
         // Any test you write for XCTest can be annotated as throws and async.
         // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
         // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-        let podcast = Podcast.mock
+        let podcast = PodcastLookup.mock
         let episode = podcast.episodes[0]
         
         XCTAssertEqual(episode.id, firstEpisode.id)
@@ -47,13 +47,14 @@ final class ScottcastTests: XCTestCase {
     }
     
     func testPodcastDecode() throws {
-        let podcast = Podcast.mock
+        let lookup = PodcastLookup.mock
+        let podcast = lookup.podcast
         XCTAssertEqual(podcast.id, 1201483158)
         XCTAssertEqual(podcast.title, "Podcast diario para aprender español - Learn Spanish Daily Podcast")
         XCTAssertEqual(podcast.author, "Hoy Hablamos")
         XCTAssertEqual(podcast.artworkUrl600, URL(string: "https://is1-ssl.mzstatic.com/image/thumb/Podcasts125/v4/72/ee/37/72ee370b-3d51-27f2-92a2-37a3a3057391/mza_4998403547888481662.jpg/600x600bb.jpg")!)
         
-        let episode = podcast.episodes[0]
+        let episode = lookup.episodes[0]
         XCTAssertEqual(episode.id, firstEpisode.id)
         XCTAssertEqual(episode.podcastId, firstEpisode.podcastId)
         XCTAssertEqual(episode.title, firstEpisode.title)
