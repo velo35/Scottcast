@@ -8,8 +8,18 @@
 import Foundation
 import SwiftData
 
+protocol PodcastData: Identifiable, Hashable
+{
+    var id: Int { get }
+    var title: String { get }
+    var author: String { get }
+    var artworkUrl30: URL { get }
+    var artworkUrl60: URL { get }
+    var artworkUrl600: URL { get }
+}
+
 @Model
-class Podcast: Identifiable
+class Podcast: Identifiable, PodcastData
 {
     let id: Int
     let title: String

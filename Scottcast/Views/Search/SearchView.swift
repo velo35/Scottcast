@@ -15,11 +15,7 @@ struct SearchView: View
     var body: some View
     {
         NavigationStack {
-            List {
-                ForEach(podcastInfos) { info in
-                    Text(info.title)
-                }
-            }
+            PodcastGridView(podcasts: podcastInfos)
         }
         .searchable(text: $searchText)
         .onChange(of: searchText) {

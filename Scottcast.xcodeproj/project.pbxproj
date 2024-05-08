@@ -11,6 +11,7 @@
 		BE13164A2BEC135E00C80488 /* PodcastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1316492BEC135E00C80488 /* PodcastInfo.swift */; };
 		BE13164C2BEC13D200C80488 /* PodcastLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE13164B2BEC13D200C80488 /* PodcastLookup.swift */; };
 		BE13164E2BEC17BA00C80488 /* PodcastSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE13164D2BEC17BA00C80488 /* PodcastSearch.swift */; };
+		BE1316502BEC1CC200C80488 /* PodcastGridView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE13164F2BEC1CC200C80488 /* PodcastGridView.swift */; };
 		BE5900292BCD7CCC00EEA72A /* DownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */; };
 		BE5F48B72BE02BFA00EDC8BB /* CompactPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F48B62BE02BFA00EDC8BB /* CompactPlayerView.swift */; };
 		BE5F48B92BE02D0B00EDC8BB /* FullPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F48B82BE02D0B00EDC8BB /* FullPlayerView.swift */; };
@@ -49,6 +50,7 @@
 		BE1316492BEC135E00C80488 /* PodcastInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastInfo.swift; sourceTree = "<group>"; };
 		BE13164B2BEC13D200C80488 /* PodcastLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastLookup.swift; sourceTree = "<group>"; };
 		BE13164D2BEC17BA00C80488 /* PodcastSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastSearch.swift; sourceTree = "<group>"; };
+		BE13164F2BEC1CC200C80488 /* PodcastGridView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastGridView.swift; sourceTree = "<group>"; };
 		BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewModel.swift; sourceTree = "<group>"; };
 		BE59002A2BCDB1F600EEA72A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		BE5F48B62BE02BFA00EDC8BB /* CompactPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactPlayerView.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			children = (
 				BEA191CB2BC892C00030C1F6 /* MovingTextView.swift */,
 				BE09A6E42BD1985F001F3C12 /* PlayPauseButton.swift */,
+				BE13164F2BEC1CC200C80488 /* PodcastGridView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -369,6 +372,7 @@
 				BE5900292BCD7CCC00EEA72A /* DownloadViewModel.swift in Sources */,
 				BE09A6E52BD1985F001F3C12 /* PlayPauseButton.swift in Sources */,
 				BE81D0252BBF1E6500ED94C3 /* PodcastViewModel.swift in Sources */,
+				BE1316502BEC1CC200C80488 /* PodcastGridView.swift in Sources */,
 				BEAA63752BBE2B4700FFCA8D /* ContentView.swift in Sources */,
 				BEA191CC2BC892C00030C1F6 /* MovingTextView.swift in Sources */,
 				BE81D0332BBF2D4C00ED94C3 /* Download.swift in Sources */,

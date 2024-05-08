@@ -15,27 +15,11 @@ struct LibraryView: View
     
     private var viewModel = PodcastViewModel()
     
-    private let columns: [GridItem] = [.init(.fixed(60)), .init(.fixed(60))]
-    
     var body: some View
     {
         ZStack(alignment: .bottom) {
             NavigationStack {
-                ScrollView {
-                    LazyVGrid(columns: columns) {
-                        ForEach(podcasts) { podcast in
-                            NavigationLink(value: podcast) {
-                                AsyncImage(url: podcast.artworkUrl600) { image in
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                            }
-                        }
-                    }
-                }
+                PodcastGridView(podcasts: podcasts)
                 .navigationTitle("Scottcast")
                 .navigationDestination(for: Podcast.self) { podcast in
                     PodcastView(podcast: podcast)
