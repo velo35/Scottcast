@@ -10,6 +10,7 @@ import SwiftUI
 struct PodcastGridView<T: PodcastData>: View
 {
     let podcasts: [T]
+    let tappedCallback: (T) -> Void
     
     private let columns: [GridItem] = [.init(.fixed(160)), .init(.fixed(160))]
     
@@ -18,7 +19,7 @@ struct PodcastGridView<T: PodcastData>: View
         ScrollView {
             LazyVGrid(columns: columns) {
                 ForEach(podcasts) { podcast in
-                    NavigationLink(value: podcast) {
+                    VStack {
                         AsyncImage(url: podcast.artworkUrl600) { image in
                             image
                                 .resizable()
@@ -26,6 +27,11 @@ struct PodcastGridView<T: PodcastData>: View
                         } placeholder: {
                             ProgressView()
                         }
+                        
+                        Text(podcast.title)
+                    }
+                    .onTapGesture {
+                        tappedCallback(podcast)
                     }
                 }
             }
@@ -34,5 +40,5 @@ struct PodcastGridView<T: PodcastData>: View
 }
 
 #Preview {
-    PodcastGridView(podcasts: [Podcast.mock])
+    PodcastGridView(podcasts: [Podcast.mock], tappedCallback: { _ in })
 }

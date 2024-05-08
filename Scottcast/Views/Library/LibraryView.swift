@@ -14,14 +14,17 @@ struct LibraryView: View
     @Query var podcasts: [Podcast]
     
     private var viewModel = PodcastViewModel()
+    @State private var selected: Podcast?
     
     var body: some View
     {
         ZStack(alignment: .bottom) {
             NavigationStack {
-                PodcastGridView(podcasts: podcasts)
+                PodcastGridView(podcasts: podcasts) { podcast in
+                    selected = podcast
+                }
                 .navigationTitle("Scottcast")
-                .navigationDestination(for: Podcast.self) { podcast in
+                .navigationDestination(item: $selected) { podcast in
                     PodcastView(podcast: podcast)
                 }
             }
