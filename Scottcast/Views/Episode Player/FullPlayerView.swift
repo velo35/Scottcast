@@ -98,7 +98,7 @@ struct FullPlayerView: View
 }
 
 #Preview {
-    FullPlayerView(episode: Episode(from: .mock2, podcast: Podcast(from: .mock)))
+    FullPlayerView(episode: .mock)
         .environment(PodcastViewModel())
         .background {
             Rectangle()

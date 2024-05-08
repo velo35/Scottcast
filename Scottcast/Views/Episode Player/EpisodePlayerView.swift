@@ -29,7 +29,7 @@ struct EpisodePlayerView: View
 }
 
 #Preview {
-    EpisodePlayerView(episode: Episode(from: .mock, podcast: Podcast(from: .mock)))
+    EpisodePlayerView(episode: .mock)
         .background {
             Rectangle()
                 .stroke(.red, lineWidth: 1)

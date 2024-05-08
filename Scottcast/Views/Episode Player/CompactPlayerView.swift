@@ -38,5 +38,5 @@ struct CompactPlayerView: View
 }
 
 #Preview {
-    CompactPlayerView(episode: Episode(from: .mock, podcast: Podcast(from: .mock)))
+    CompactPlayerView(episode: .mock)
 }

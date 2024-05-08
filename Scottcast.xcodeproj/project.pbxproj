@@ -10,6 +10,7 @@
 		BE09A6E52BD1985F001F3C12 /* PlayPauseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE09A6E42BD1985F001F3C12 /* PlayPauseButton.swift */; };
 		BE13164A2BEC135E00C80488 /* PodcastInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1316492BEC135E00C80488 /* PodcastInfo.swift */; };
 		BE13164C2BEC13D200C80488 /* PodcastLookup.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE13164B2BEC13D200C80488 /* PodcastLookup.swift */; };
+		BE13164E2BEC17BA00C80488 /* PodcastSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE13164D2BEC17BA00C80488 /* PodcastSearch.swift */; };
 		BE5900292BCD7CCC00EEA72A /* DownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */; };
 		BE5F48B72BE02BFA00EDC8BB /* CompactPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F48B62BE02BFA00EDC8BB /* CompactPlayerView.swift */; };
 		BE5F48B92BE02D0B00EDC8BB /* FullPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F48B82BE02D0B00EDC8BB /* FullPlayerView.swift */; };
@@ -47,6 +48,7 @@
 		BE09A6E42BD1985F001F3C12 /* PlayPauseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayPauseButton.swift; sourceTree = "<group>"; };
 		BE1316492BEC135E00C80488 /* PodcastInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastInfo.swift; sourceTree = "<group>"; };
 		BE13164B2BEC13D200C80488 /* PodcastLookup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastLookup.swift; sourceTree = "<group>"; };
+		BE13164D2BEC17BA00C80488 /* PodcastSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastSearch.swift; sourceTree = "<group>"; };
 		BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DownloadViewModel.swift; sourceTree = "<group>"; };
 		BE59002A2BCDB1F600EEA72A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		BE5F48B62BE02BFA00EDC8BB /* CompactPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactPlayerView.swift; sourceTree = "<group>"; };
@@ -231,6 +233,7 @@
 				BEAA63832BBE2BBB00FFCA8D /* Podcast.swift */,
 				BE1316492BEC135E00C80488 /* PodcastInfo.swift */,
 				BE13164B2BEC13D200C80488 /* PodcastLookup.swift */,
+				BE13164D2BEC17BA00C80488 /* PodcastSearch.swift */,
 				BEAA63852BBE2BC400FFCA8D /* Episode.swift */,
 			);
 			path = Models;
@@ -372,6 +375,7 @@
 				BEAA63862BBE2BC400FFCA8D /* Episode.swift in Sources */,
 				BEFEE41F2BEACD19007F2227 /* LibraryView.swift in Sources */,
 				BE13164C2BEC13D200C80488 /* PodcastLookup.swift in Sources */,
+				BE13164E2BEC17BA00C80488 /* PodcastSearch.swift in Sources */,
 				BEFEE4222BEAD31F007F2227 /* SearchView.swift in Sources */,
 				BEAA63732BBE2B4700FFCA8D /* ScottcastApp.swift in Sources */,
 				BE5F48B92BE02D0B00EDC8BB /* FullPlayerView.swift in Sources */,

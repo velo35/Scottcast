@@ -24,17 +24,15 @@ class Podcast: Identifiable
         self.episodes.sorted(using: KeyPathComparator(\.date, order: .reverse))
     }
     
-    init(from lookup: PodcastLookup)
+    init(from info: PodcastInfo, episodes: [EpisodeInfo])
     {
-        let info = lookup.podcast
-        
         self.id = info.id
         self.title = info.title
         self.author = info.author
         self.artworkUrl30 = info.artworkUrl30
         self.artworkUrl60 = info.artworkUrl60
         self.artworkUrl600 = info.artworkUrl600
-        self.episodes = lookup.episodes.map{ Episode(from: $0, podcast: self) }
+        self.episodes = episodes.map{ Episode(from: $0, podcast: self) }
     }
     
     subscript(episodeId: Episode.ID) -> Episode? {

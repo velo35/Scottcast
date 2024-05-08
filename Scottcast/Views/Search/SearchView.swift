@@ -10,13 +10,16 @@ import SwiftUI
 struct SearchView: View 
 {
     @State private var searchText = ""
+    @State private var podcastInfos = [PodcastInfo]()
     
     var body: some View
     {
         NavigationStack {
             List {
-                Text("hey")
-            }            
+                ForEach(podcastInfos) { info in
+                    Text(info.title)
+                }
+            }
         }
         .searchable(text: $searchText)
         .onChange(of: searchText) {
@@ -27,9 +30,10 @@ struct SearchView: View
                 guard let (data, response) = try await URLSession.shared.data(from: url) as? (Data, HTTPURLResponse),
                       (200 ... 299) ~= response.statusCode else { print("bad response"); return }
                 
-                let result = String(data: data, encoding: .utf8)!
-                print("*****")
-                print("\(result)")
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let search = try decoder.decode(PodcastSearch.self, from: data)
+                self.podcastInfos = search.podcasts
             }
         }
     }

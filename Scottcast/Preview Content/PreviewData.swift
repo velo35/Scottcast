@@ -30,3 +30,17 @@ extension EpisodeInfo
         PodcastLookup.mock.episodes.first(where: { $0.id == 1000651065168})!
     }()
 }
+
+extension Podcast
+{
+    static let mock = {
+        Podcast(from: PodcastLookup.mock.podcast, episodes: PodcastLookup.mock.episodes)
+    }()
+}
+
+extension Episode
+{
+    static let mock = {
+        Episode(from: .mock, podcast: .mock)
+    }()
+}

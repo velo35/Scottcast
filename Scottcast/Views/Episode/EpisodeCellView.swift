@@ -59,6 +59,6 @@ struct EpisodeCellView: View
 }
 
 #Preview {
-    EpisodeCellView(episode: Episode(from: .mock, podcast: Podcast(from: .mock)))
+    EpisodeCellView(episode: .mock)
         .environment(PodcastViewModel())
 }

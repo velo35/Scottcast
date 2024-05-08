@@ -41,6 +41,5 @@ struct PodcastView: View
 }
 
 #Preview {
-    PodcastView(podcast: Podcast(from: .mock))
-//        .environment(PodcastViewModel())
+    PodcastView(podcast: .mock)
 }
