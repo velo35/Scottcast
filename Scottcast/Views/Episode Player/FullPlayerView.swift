@@ -14,7 +14,7 @@ struct FullPlayerView: View
     @State private var dragging = false
     @State private var elapsed = TimeInterval.zero
     @State private var wasPlaying = false
-    private let player = EpisodePlayer.shared
+    private let player = PlayerController.shared
     
     private var elapsedTime: TimeInterval
     {

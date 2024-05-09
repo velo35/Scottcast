@@ -1,5 +1,5 @@
 //
-//  PodcastViewModel.swift
+//  PlayerController.swift
 //  Scottcast
 //
 //  Created by Scott Daniel on 4/4/24.
@@ -10,9 +10,9 @@ import AVFoundation
 import SwiftData
 
 @Observable
-class EpisodePlayer
+class PlayerController
 {
-    static let shared = EpisodePlayer()
+    static let shared = PlayerController()
     
     private init() {}
     

@@ -15,7 +15,7 @@
 		BE5900292BCD7CCC00EEA72A /* DownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */; };
 		BE5F48B72BE02BFA00EDC8BB /* CompactPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F48B62BE02BFA00EDC8BB /* CompactPlayerView.swift */; };
 		BE5F48B92BE02D0B00EDC8BB /* FullPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE5F48B82BE02D0B00EDC8BB /* FullPlayerView.swift */; };
-		BE81D0252BBF1E6500ED94C3 /* EpisodePlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D0242BBF1E6500ED94C3 /* EpisodePlayer.swift */; };
+		BE81D0252BBF1E6500ED94C3 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D0242BBF1E6500ED94C3 /* PlayerController.swift */; };
 		BE81D0282BBF1EEC00ED94C3 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D0272BBF1EEC00ED94C3 /* NetworkService.swift */; };
 		BE81D02B2BBF250300ED94C3 /* PodcastView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D02A2BBF250300ED94C3 /* PodcastView.swift */; };
 		BE81D02D2BBF254000ED94C3 /* PreviewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE81D02C2BBF254000ED94C3 /* PreviewData.swift */; };
@@ -55,7 +55,7 @@
 		BE59002A2BCDB1F600EEA72A /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		BE5F48B62BE02BFA00EDC8BB /* CompactPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompactPlayerView.swift; sourceTree = "<group>"; };
 		BE5F48B82BE02D0B00EDC8BB /* FullPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPlayerView.swift; sourceTree = "<group>"; };
-		BE81D0242BBF1E6500ED94C3 /* EpisodePlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EpisodePlayer.swift; sourceTree = "<group>"; };
+		BE81D0242BBF1E6500ED94C3 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 		BE81D0272BBF1EEC00ED94C3 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		BE81D02A2BBF250300ED94C3 /* PodcastView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PodcastView.swift; sourceTree = "<group>"; };
 		BE81D02C2BBF254000ED94C3 /* PreviewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewData.swift; sourceTree = "<group>"; };
@@ -138,7 +138,6 @@
 		BE81D0232BBF1E4300ED94C3 /* View Models */ = {
 			isa = PBXGroup;
 			children = (
-				BE81D0242BBF1E6500ED94C3 /* EpisodePlayer.swift */,
 				BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */,
 			);
 			path = "View Models";
@@ -209,6 +208,7 @@
 			isa = PBXGroup;
 			children = (
 				BE81D0212BBF1DD300ED94C3 /* App */,
+				BEEF8EB72BED68C500E45125 /* Controllers */,
 				BEAA63822BBE2BAB00FFCA8D /* Models */,
 				BE81D0262BBF1ED600ED94C3 /* Services */,
 				BE81D0202BBF1DC900ED94C3 /* Views */,
@@ -248,6 +248,14 @@
 				BEAA638F2BBE2DA900FFCA8D /* ScottcastTests.swift */,
 			);
 			path = ScottcastTests;
+			sourceTree = "<group>";
+		};
+		BEEF8EB72BED68C500E45125 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				BE81D0242BBF1E6500ED94C3 /* PlayerController.swift */,
+			);
+			path = Controllers;
 			sourceTree = "<group>";
 		};
 		BEFEE41D2BEACD0B007F2227 /* Library */ = {
@@ -371,7 +379,7 @@
 				BE81D02D2BBF254000ED94C3 /* PreviewData.swift in Sources */,
 				BE5900292BCD7CCC00EEA72A /* DownloadViewModel.swift in Sources */,
 				BE09A6E52BD1985F001F3C12 /* PlayPauseButton.swift in Sources */,
-				BE81D0252BBF1E6500ED94C3 /* EpisodePlayer.swift in Sources */,
+				BE81D0252BBF1E6500ED94C3 /* PlayerController.swift in Sources */,
 				BE1316502BEC1CC200C80488 /* PodcastGridView.swift in Sources */,
 				BEAA63752BBE2B4700FFCA8D /* ContentView.swift in Sources */,
 				BEA191CC2BC892C00030C1F6 /* MovingTextView.swift in Sources */,

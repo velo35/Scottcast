@@ -12,7 +12,7 @@ struct PlayPauseButton: View
     let episode: Episode
     
     private var font: Font? = nil
-    private let player = EpisodePlayer.shared
+    private let player = PlayerController.shared
     
     init(episode: Episode, size: CGFloat? = nil) {
         self.episode = episode

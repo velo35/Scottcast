@@ -14,7 +14,7 @@ struct LibraryView: View
     @Query var podcasts: [Podcast]
     
     @State private var selected: Podcast?
-    private let player = EpisodePlayer.shared
+    private let player = PlayerController.shared
     
     var body: some View
     {
