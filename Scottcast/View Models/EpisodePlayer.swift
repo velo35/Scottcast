@@ -34,8 +34,8 @@ class EpisodePlayer
     
     func setupPlayer()
     {
-        guard let episode, episode.isDownloaded else { return }
-        let player = AVPlayer(url: episode.fileUrl)
+        guard let episode else { return }
+        let player = AVPlayer(url: episode.isDownloaded ? episode.fileUrl : episode.url)
         player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: 1), queue: nil) { [unowned self] time in
             self.elapsed = time.seconds
         }

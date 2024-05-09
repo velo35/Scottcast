@@ -28,7 +28,7 @@ struct PodcastGridView<T: PodcastData>: View
                             ProgressView()
                         }
                         
-                        Text(podcast.title)
+                        Text(podcast.author)
                     }
                     .onTapGesture {
                         tappedCallback(podcast)

@@ -37,10 +37,9 @@ struct EpisodeCellView: View
             Text(episode.title)
             
             HStack {
-                if episode.isDownloaded {
-                    PlayPauseButton(episode: episode)
-                }
-                else {
+                PlayPauseButton(episode: episode)
+                
+                if !episode.isDownloaded {
                     downloadButton
                 }
                 
