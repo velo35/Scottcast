@@ -23,14 +23,8 @@ class DownloadViewModel
     
     var status = Status.initial
     
-    var downloadProgress: Double {
+    var progress: Double {
         self.totalBytes > 0 ? Double(self.currentBytes) / Double(self.totalBytes) : 0.0
-    }
-    
-    func updateProgress(currentBytes: Int64, totalBytes: Int64)
-    {
-        self.currentBytes = currentBytes
-        self.totalBytes = totalBytes
     }
     
     init(episode: Episode)
@@ -49,10 +43,17 @@ class DownloadViewModel
                 case let .progress(totalBytesWritten, totalBytesExpectedToWrite):
                     self.updateProgress(currentBytes: totalBytesWritten, totalBytes: totalBytesExpectedToWrite)
                 case .finished:
+                    self.episode.isDownloaded = true
                     self.status = .success
                 case .error:
                     self.status = .failed
             }
         }
+    }
+    
+    private func updateProgress(currentBytes: Int64, totalBytes: Int64)
+    {
+        self.currentBytes = currentBytes
+        self.totalBytes = totalBytes
     }
 }

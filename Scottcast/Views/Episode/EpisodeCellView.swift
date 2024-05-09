@@ -22,10 +22,29 @@ struct EpisodeCellView: View
                 downloadViewModel = nil
             }
         } label: {
-            Image(systemName: "arrow.down.circle")
+            Image(systemName: episode.isDownloaded ? "arrow.down.circle.fill" : "arrow.down.circle")
                 .imageScale(.large)
+                .foregroundStyle(episode.isDownloaded ? .green : .cyan)
+                .overlay {
+                    if let downloadViewModel {
+                        Image(systemName: "arrow.down.circle")
+                            .foregroundStyle(.purple)
+                            .mask {
+                                GeometryReader { proxy in
+                                    var path = Path()
+                                    let center = CGPoint(x: proxy.size.width / 2, y: proxy.size.height / 2)
+                                    let progress = downloadViewModel.progress
+                                    path.move(to: center)
+                                    path.addArc(center: center, radius: center.x, startAngle: .degrees(0), endAngle: .degrees(360 * progress), clockwise: false)
+                                    return path
+                                }
+                                .rotationEffect(.degrees(-90))
+                            }
+                    }
+                }
         }
         .buttonStyle(.plain)
+        .disabled(episode.isDownloaded)
     }
     
     var body: some View
@@ -39,17 +58,13 @@ struct EpisodeCellView: View
             HStack {
                 PlayPauseButton(episode: episode)
                 
-                if !episode.isDownloaded {
-                    downloadButton
-                }
-                
                 if let millis = episode.durationMillis {
                     Text(.milliseconds(millis), format: .time(pattern: .minuteSecond))
                 }
                 
-                if let downloadViewModel {
-                    ProgressView(value: downloadViewModel.downloadProgress)
-                }
+                Spacer()
+                
+                downloadButton
             }
         }
     }
