@@ -13,8 +13,8 @@ struct LibraryView: View
     @Environment(\.modelContext) var modelContext
     @Query var podcasts: [Podcast]
     
-    private var viewModel = PodcastViewModel()
     @State private var selected: Podcast?
+    private let player = EpisodePlayer.shared
     
     var body: some View
     {
@@ -29,7 +29,7 @@ struct LibraryView: View
                 }
             }
             
-            if let episode = viewModel.episode {
+            if let episode = player.episode {
                 EpisodePlayerView(episode: episode)
                     .transition(.move(edge: .bottom))
             }
@@ -48,7 +48,6 @@ struct LibraryView: View
 //                print(error.localizedDescription)
 //            }
 //        }
-        .environment(viewModel)
     }
 }
 

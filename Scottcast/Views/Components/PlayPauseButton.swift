@@ -9,10 +9,10 @@ import SwiftUI
 
 struct PlayPauseButton: View
 {
-    @Environment(PodcastViewModel.self) var viewModel
-    
     let episode: Episode
-    var font: Font? = nil
+    
+    private var font: Font? = nil
+    private let player = EpisodePlayer.shared
     
     init(episode: Episode, size: CGFloat? = nil) {
         self.episode = episode
@@ -24,18 +24,14 @@ struct PlayPauseButton: View
     var body: some View
     {
         Button {
-            withAnimation {
-                viewModel.episode = episode
-            }
-            
-            if !viewModel.isPlaying {
-                viewModel.play()
+            if !player.isPlaying {
+                player.play(episode: episode)
             }
             else {
-                viewModel.pause()
+                player.pause()
             }
         } label: {
-            Image(systemName: viewModel.isPlaying && viewModel.episode == episode ? "pause.fill" : "play.fill")
+            Image(systemName: player.isPlaying && player.episode == episode ? "pause.fill" : "play.fill")
                 .font(self.font)
         }
         .buttonStyle(.plain)
@@ -44,5 +40,4 @@ struct PlayPauseButton: View
 
 #Preview {
     PlayPauseButton(episode: .mock, size: 64)
-        .environment(PodcastViewModel())
 }

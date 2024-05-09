@@ -9,11 +9,9 @@ import SwiftUI
 
 struct EpisodeCellView: View
 {
-    @Environment(PodcastViewModel.self) var viewModel
+    let episode: Episode
     
     @State private var downloadViewModel: DownloadViewModel?
-    
-    let episode: Episode
     
     var downloadButton: some View
     {
@@ -60,5 +58,4 @@ struct EpisodeCellView: View
 
 #Preview {
     EpisodeCellView(episode: .mock)
-        .environment(PodcastViewModel())
 }

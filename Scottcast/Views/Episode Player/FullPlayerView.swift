@@ -9,17 +9,16 @@ import SwiftUI
 
 struct FullPlayerView: View 
 {
-    @Environment(PodcastViewModel.self) var viewModel
-    
     let episode: Episode
     
     @State private var dragging = false
     @State private var elapsed = TimeInterval.zero
     @State private var wasPlaying = false
+    private let player = EpisodePlayer.shared
     
     private var elapsedTime: TimeInterval
     {
-        dragging ? elapsed : viewModel.elapsed
+        dragging ? elapsed : player.elapsed
     }
     
     var body: some View
@@ -40,7 +39,7 @@ struct FullPlayerView: View
             MovingTextView(text: episode.title)
             
             VStack {
-                ProgressView(value: elapsedTime, total: viewModel.duration)
+                ProgressView(value: elapsedTime, total: player.duration)
                     .scaleEffect(x: dragging ? 1.05 : 1, y: dragging ? 2.2 : 1)
                     .animation(.default, value: dragging)
                 
@@ -49,23 +48,23 @@ struct FullPlayerView: View
                     
                     Spacer()
                     
-                    Text("-") + Text(.seconds(viewModel.duration - elapsedTime), format: .time(pattern: .minuteSecond))
+                    Text("-") + Text(.seconds(player.duration - elapsedTime), format: .time(pattern: .minuteSecond))
                 }
             }
             .gesture(
                 DragGesture(minimumDistance: 0)
                     .onChanged { drag in
                         if !dragging {
-                            wasPlaying = viewModel.isPlaying
-                            viewModel.pause()
+                            wasPlaying = player.isPlaying
+                            player.pause()
                         }
                         dragging = true
-                        elapsed = viewModel.elapsed + viewModel.duration * drag.translation.width / UIScreen.main.bounds.width
+                        elapsed = player.elapsed + player.duration * drag.translation.width / UIScreen.main.bounds.width
                     }
                     .onEnded { drag in
-                        viewModel.seek(to: elapsed)
+                        player.seek(to: elapsed)
                         if wasPlaying {
-                            viewModel.play()
+                            player.play(episode: episode)
                         }
                         dragging = false
                     }
@@ -75,7 +74,7 @@ struct FullPlayerView: View
             
             HStack(spacing: 30) {
                 Button {
-                    viewModel.skip(amount: -15)
+                    player.skip(amount: -15)
                 } label: {
                     Image(systemName: "gobackward.15")
                         .font(.system(size: 32))
@@ -85,7 +84,7 @@ struct FullPlayerView: View
                 PlayPauseButton(episode: episode, size: 32)
                 
                 Button {
-                    viewModel.skip(amount: 30)
+                    player.skip(amount: 30)
                 } label: {
                     Image(systemName: "goforward.30")
                         .font(.system(size: 32))
@@ -99,9 +98,4 @@ struct FullPlayerView: View
 
 #Preview {
     FullPlayerView(episode: .mock)
-        .environment(PodcastViewModel())
-        .background {
-            Rectangle()
-                .stroke(lineWidth: 1)
-        }
 }

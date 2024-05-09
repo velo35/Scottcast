@@ -9,9 +9,8 @@ import SwiftUI
 
 struct EpisodePlayerView: View 
 {
-    @Environment(PodcastViewModel.self) var viewModel
-    
     let episode: Episode
+    
     @State private var showFullPlayer = false
     
     var body: some View
@@ -34,5 +33,4 @@ struct EpisodePlayerView: View
             Rectangle()
                 .stroke(.red, lineWidth: 1)
         }
-        .environment(PodcastViewModel())
 }
