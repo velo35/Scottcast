@@ -135,12 +135,12 @@
 			path = Root;
 			sourceTree = "<group>";
 		};
-		BE81D0232BBF1E4300ED94C3 /* View Models */ = {
+		BE81D0232BBF1E4300ED94C3 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
 				BE5900282BCD7CCC00EEA72A /* DownloadViewModel.swift */,
 			);
-			path = "View Models";
+			path = ViewModels;
 			sourceTree = "<group>";
 		};
 		BE81D0262BBF1ED600ED94C3 /* Services */ = {
@@ -212,7 +212,7 @@
 				BEAA63822BBE2BAB00FFCA8D /* Models */,
 				BE81D0262BBF1ED600ED94C3 /* Services */,
 				BE81D0202BBF1DC900ED94C3 /* Views */,
-				BE81D0232BBF1E4300ED94C3 /* View Models */,
+				BE81D0232BBF1E4300ED94C3 /* ViewModels */,
 				BE81D0312BBF2D3B00ED94C3 /* Utils */,
 				BEAA63762BBE2B4800FFCA8D /* Assets.xcassets */,
 				BEAA63782BBE2B4800FFCA8D /* Preview Content */,
