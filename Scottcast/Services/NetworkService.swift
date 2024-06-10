@@ -20,4 +20,14 @@ enum NetworkService
               (200 ... 299).contains(response.statusCode) else { throw NetworkServiceError.response }
         return data
     }
+    
+    static func fetch(podcastId id: Int) async throws -> PodcastLookup
+    {
+        let url = URL(string: "https://itunes.apple.com/lookup?id=\(id)&media=podcast&entity=podcastEpisode")!
+        let data = try await NetworkService.fetch(url: url)
+        
+        let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601
+        return try decoder.decode(PodcastLookup.self, from: data)
+    }
 }

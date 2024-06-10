@@ -14,17 +14,23 @@ struct SearchView: View
     @State private var podcastInfos = [PodcastInfo]()
     @State private var selected: PodcastInfo?
     
+    @MainActor
     private func fetch(_ info: PodcastInfo)
     {
         Task {
-            let url = URL(string: "https://itunes.apple.com/lookup?id=\(info.id)&media=podcast&entity=podcastEpisode")!
-            let data = try await NetworkService.fetch(url: url)
+            do {
+                let lookup = try await NetworkService.fetch(podcastId: info.id)
+                let podcast = Podcast(from: lookup.podcast)
+                self.modelContext.insert(podcast)
+                let episodes = lookup.episodes.map{ Episode(from: $0, podcast: podcast)}
+                for episode in episodes {
+                    self.modelContext.insert(episode)
+                }
+                podcast.episodes = episodes
+            } catch {
+                print("SearchView: \(error.localizedDescription)")
+            }
             
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            let lookup = try decoder.decode(PodcastLookup.self, from: data)
-            
-            self.modelContext.insert(Podcast(from: lookup.podcast, episodes: lookup.episodes))
         }
     }
     

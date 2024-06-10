@@ -19,39 +19,43 @@ protocol PodcastData: Identifiable, Hashable
 }
 
 @Model
-class Podcast: Identifiable, PodcastData
+final class Podcast: Identifiable, PodcastData
 {
-    let id: Int
+    @Attribute(.unique) let id: Int
     let title: String
     let author: String
     let artworkUrl30: URL
     let artworkUrl60: URL
     let artworkUrl600: URL
-    var episodes = [Episode]()
+    @Relationship(deleteRule: .cascade, inverse: \Episode.podcast) var episodes = [Episode]()
+    
+    init(id: Int, title: String, author: String, artworkUrl30: URL, artworkUrl60: URL, artworkUrl600: URL)
+    {
+        self.id = id
+        self.title = title
+        self.author = author
+        self.artworkUrl30 = artworkUrl30
+        self.artworkUrl60 = artworkUrl60
+        self.artworkUrl600 = artworkUrl600
+    }
     
     var sortedEpisodes: [Episode]
     {
         self.episodes.sorted(using: KeyPathComparator(\.date, order: .reverse))
     }
-    
-    init(from info: PodcastInfo, episodes: [EpisodeInfo])
+}
+
+extension Podcast
+{
+    convenience init(from info: PodcastInfo)
     {
-        self.id = info.id
-        self.title = info.title
-        self.author = info.author
-        self.artworkUrl30 = info.artworkUrl30
-        self.artworkUrl60 = info.artworkUrl60
-        self.artworkUrl600 = info.artworkUrl600
-        self.episodes = episodes.map{ Episode(from: $0, podcast: self) }
-    }
-    
-    subscript(episodeId: Episode.ID) -> Episode? {
-        get {
-            episodes.first{ episodeId == $0.id }
-        }
-        set {
-            guard let newValue, let index = episodes.firstIndex(where: { episodeId == $0.id }) else { return }
-            episodes[index] = newValue
-        }
+        self.init(
+            id: info.id,
+            title: info.title,
+            author: info.author,
+            artworkUrl30: info.artworkUrl30,
+            artworkUrl60: info.artworkUrl60,
+            artworkUrl600: info.artworkUrl600
+        )
     }
 }

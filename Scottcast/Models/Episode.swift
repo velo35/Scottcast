@@ -9,34 +9,47 @@ import Foundation
 import SwiftData
 
 @Model
-class Episode: Identifiable, Equatable
+final class Episode: Identifiable, Equatable
 {
-    let id: Int
+    @Attribute(.unique) let id: Int
     let podcastId: Int
     let title: String
     let date: Date
     let details: String
     let durationMillis: Int?
     let url: URL
-    let podcast: Podcast
+    var podcast: Podcast
     var isDownloaded = false
     
-    init(from info: EpisodeInfo, podcast: Podcast)
-    {
-        self.id = info.id
-        self.podcastId = info.podcastId
-        self.title = info.title
-        self.date = info.date
-        self.details = info.description
-        self.durationMillis = info.durationMillis
-        self.url = info.url
-        
+    init(id: Int, podcastId: Int, title: String, date: Date, details: String, durationMillis: Int?, url: URL, podcast: Podcast, isDownloaded: Bool = false) {
+        self.id = id
+        self.podcastId = podcastId
+        self.title = title
+        self.date = date
+        self.details = details
+        self.durationMillis = durationMillis
+        self.url = url
         self.podcast = podcast
+        self.isDownloaded = isDownloaded
     }
 }
 
 extension Episode
 {
+    convenience init(from info: EpisodeInfo, podcast: Podcast)
+    {
+        self.init(
+            id: info.id,
+            podcastId: info.podcastId,
+            title: info.title,
+            date: info.date,
+            details: info.description,
+            durationMillis: info.durationMillis,
+            url: info.url,
+            podcast: podcast
+        )
+    }
+    
     var fileUrl: URL {
         URL.documentsDirectory
             .appending(component: "Pocasts")
