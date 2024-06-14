@@ -48,7 +48,12 @@ struct FullPlayerView: View
                     
                     Spacer()
                     
-                    Text("-") + Text(.seconds(player.duration - elapsedTime), format: .time(pattern: .minuteSecond))
+                    if player.isLoading {
+                        ProgressView()
+                    }
+                    else {
+                        Text("-") + Text(.seconds(player.duration - elapsedTime), format: .time(pattern: .minuteSecond))
+                    }
                 }
             }
             .gesture(

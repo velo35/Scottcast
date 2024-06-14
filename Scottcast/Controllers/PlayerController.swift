@@ -7,7 +7,7 @@
 
 import Foundation
 import AVFoundation
-import SwiftData
+import Combine
 
 @Observable
 class PlayerController
@@ -18,34 +18,40 @@ class PlayerController
     
     private(set) var episode: Episode? {
         didSet {
-            if oldValue != self.episode {
-                self.setupPlayer()
-            }
+            guard let episode = self.episode, episode != oldValue else { return }
+            self.setupPlayer(for: episode)
         }
     }
     
     var rate: Float = 0.0
-    var elapsed: TimeInterval = 0
     var isPlaying: Bool { self.rate != 0.0 }
-    var duration: TimeInterval { self.player?.currentItem?.duration.seconds ?? 0 }
+    private(set) var elapsed: TimeInterval = 0
+    private(set) var duration: TimeInterval = 0.0
+    private(set) var isLoading = false
     
     private var player: AVPlayer?
-    private var observations = [NSKeyValueObservation]()
+    private var cancellables = Set<AnyCancellable>()
     
-    func setupPlayer()
+    private func setupPlayer(for episode: Episode)
     {
-        guard let episode else { return }
-        let player = AVPlayer(url: episode.isDownloaded ? episode.fileUrl : episode.url)
+        let item = AVPlayerItem(url: episode.isDownloaded ? episode.fileUrl : episode.url)
+        let player = AVPlayer(playerItem: item)
         player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: 1), queue: nil) { [unowned self] time in
             self.elapsed = time.seconds
         }
         
-        self.observations = [
-            player.observe(\.rate, options: .new) { player, change in
-                guard let rate = change.newValue else { return }
-                self.rate = rate
-            }
-        ]
+        item.publisher(for: \.duration)
+            .first(where: { $0 != .indefinite })
+            .map { $0.seconds }
+            .assign(to: \.duration, on: self)
+            .store(in: &self.cancellables)
+        
+        player.publisher(for: \.rate)
+            .receive(on: DispatchQueue.main)
+            .assign(to: \.rate, on: self)
+            .store(in: &self.cancellables)
+        
+        
         
         self.player = player
     }
