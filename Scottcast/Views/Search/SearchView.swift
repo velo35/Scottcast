@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct SearchView: View 
+@MainActor
+struct SearchView: View
 {
     @Environment(\.modelContext) private var modelContext
     @State private var searchText = ""
     @State private var podcastInfos = [PodcastInfo]()
     @State private var selected: PodcastInfo?
     
-    @MainActor
     private func fetch(_ info: PodcastInfo)
     {
         Task {
@@ -22,11 +22,11 @@ struct SearchView: View
                 let lookup = try await NetworkService.fetch(podcastId: info.id)
                 let podcast = Podcast(from: lookup.podcast)
                 self.modelContext.insert(podcast)
+                
                 let episodes = lookup.episodes.map{ Episode(from: $0, podcast: podcast)}
                 for episode in episodes {
                     self.modelContext.insert(episode)
                 }
-                podcast.episodes = episodes
             } catch {
                 print("SearchView: \(error.localizedDescription)")
             }
