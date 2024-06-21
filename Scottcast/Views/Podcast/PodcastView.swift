@@ -14,25 +14,6 @@ struct PodcastView: View
     
     let podcast: Podcast
     
-    private func fetch(_ id: Int)
-    {
-        Task {
-            do {
-                let lookup = try await NetworkService.fetch(podcastId: id)
-                let podcast = Podcast(from: lookup.podcast)
-                self.modelContext.insert(podcast)
-                let episodes = lookup.episodes.map{ Episode(from: $0, podcast: podcast)}
-                for episode in episodes {
-                    self.modelContext.insert(episode)
-                }
-                podcast.episodes = episodes
-            } catch {
-                print("SearchView: \(error.localizedDescription)")
-            }
-            
-        }
-    }
-    
     var body: some View
     {
         List {
@@ -61,7 +42,14 @@ struct PodcastView: View
             }
         }
         .refreshable {
-            fetch(podcast.id)
+            do {
+                let episodes = try await NetworkService.fetch(podcastId: podcast.id)
+                for episode in episodes {
+                    modelContext.insert(episode)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
         }
     }
 }

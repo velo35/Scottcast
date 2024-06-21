@@ -18,10 +18,11 @@ final class Episode: Identifiable, Equatable
     let details: String
     let durationMillis: Int?
     let url: URL
-    var podcast: Podcast?
+    var podcast: Podcast
     var isDownloaded = false
     
-    init(id: Int, podcastId: Int, title: String, date: Date, details: String, durationMillis: Int?, url: URL, podcast: Podcast, isDownloaded: Bool = false) {
+    init(id: Int, podcastId: Int, title: String, date: Date, details: String, durationMillis: Int?, url: URL, podcast: Podcast)
+    {
         self.id = id
         self.podcastId = podcastId
         self.title = title
@@ -30,7 +31,6 @@ final class Episode: Identifiable, Equatable
         self.durationMillis = durationMillis
         self.url = url
         self.podcast = podcast
-        self.isDownloaded = isDownloaded
     }
 }
 

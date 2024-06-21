@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftData
 
 enum NetworkServiceError: Error
 {
@@ -21,13 +22,16 @@ enum NetworkService
         return data
     }
     
-    static func fetch(podcastId id: Int) async throws -> PodcastLookup
+    static func fetch(podcastId id: Int) async throws -> [Episode]
     {
         let url = URL(string: "https://itunes.apple.com/lookup?id=\(id)&media=podcast&entity=podcastEpisode")!
         let data = try await NetworkService.fetch(url: url)
         
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
-        return try decoder.decode(PodcastLookup.self, from: data)
+        let lookup = try decoder.decode(PodcastLookup.self, from: data)
+        
+        let podcast = Podcast(from: lookup.podcast)
+        return lookup.episodes.map { Episode(from: $0, podcast: podcast)}
     }
 }

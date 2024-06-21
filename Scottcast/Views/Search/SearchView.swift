@@ -15,25 +15,6 @@ struct SearchView: View
     @State private var podcastInfos = [PodcastInfo]()
     @State private var selected: PodcastInfo?
     
-    private func fetch(_ info: PodcastInfo)
-    {
-        Task {
-            do {
-                let lookup = try await NetworkService.fetch(podcastId: info.id)
-                let podcast = Podcast(from: lookup.podcast)
-                self.modelContext.insert(podcast)
-                
-                let episodes = lookup.episodes.map{ Episode(from: $0, podcast: podcast)}
-                for episode in episodes {
-                    self.modelContext.insert(episode)
-                }
-            } catch {
-                print("SearchView: \(error.localizedDescription)")
-            }
-            
-        }
-    }
-    
     var body: some View
     {
         NavigationStack {
@@ -55,7 +36,16 @@ struct SearchView: View
                         Text(info.title)
                         
                         Button("Add to Library") {
-                            fetch(info)
+                            Task {
+                                do {
+                                    let episodes = try await NetworkService.fetch(podcastId: info.id)
+                                    for episode in episodes {
+                                        modelContext.insert(episode)
+                                    }
+                                } catch {
+                                    print(error.localizedDescription)
+                                }
+                            }
                             selected = nil
                         }
                         .buttonStyle(.borderedProminent)
