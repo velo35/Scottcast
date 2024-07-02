@@ -11,17 +11,18 @@ import SwiftData
 @Model
 final class Episode: Identifiable, Equatable
 {
-    @Attribute(.unique) let id: Int
+    @Attribute(.unique)
+    let id: Int
     let podcastId: Int
     let title: String
     let date: Date
     let details: String
     let durationMillis: Int?
     let url: URL
-    var podcast: Podcast
+    var podcast: Podcast?
     var isDownloaded = false
     
-    init(id: Int, podcastId: Int, title: String, date: Date, details: String, durationMillis: Int?, url: URL, podcast: Podcast)
+    init(id: Int, podcastId: Int, title: String, date: Date, details: String, durationMillis: Int?, url: URL)
     {
         self.id = id
         self.podcastId = podcastId
@@ -30,13 +31,12 @@ final class Episode: Identifiable, Equatable
         self.details = details
         self.durationMillis = durationMillis
         self.url = url
-        self.podcast = podcast
     }
 }
 
 extension Episode
 {
-    convenience init(from info: EpisodeInfo, podcast: Podcast)
+    convenience init(from info: EpisodeInfo)
     {
         self.init(
             id: info.id,
@@ -45,8 +45,7 @@ extension Episode
             date: info.date,
             details: info.description,
             durationMillis: info.durationMillis,
-            url: info.url,
-            podcast: podcast
+            url: info.url
         )
     }
     

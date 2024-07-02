@@ -22,7 +22,7 @@ enum NetworkService
         return data
     }
     
-    static func fetch(podcastId id: Int) async throws -> [Episode]
+    static func fetch(podcastId id: Int) async throws -> Podcast
     {
         let url = URL(string: "https://itunes.apple.com/lookup?id=\(id)&media=podcast&entity=podcastEpisode")!
         let data = try await NetworkService.fetch(url: url)
@@ -31,7 +31,8 @@ enum NetworkService
         decoder.dateDecodingStrategy = .iso8601
         let lookup = try decoder.decode(PodcastLookup.self, from: data)
         
-        let podcast = Podcast(from: lookup.podcast)
-        return lookup.episodes.map { Episode(from: $0, podcast: podcast)}
+        let episodes = lookup.episodes.map { Episode(from: $0) }
+        let podcast = Podcast(from: lookup.podcast, episodes: episodes)
+        return podcast
     }
 }

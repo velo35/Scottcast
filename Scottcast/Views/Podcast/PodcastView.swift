@@ -43,9 +43,10 @@ struct PodcastView: View
         }
         .refreshable {
             do {
-                let episodes = try await NetworkService.fetch(podcastId: podcast.id)
-                for episode in episodes {
-                    modelContext.insert(episode)
+                let podcast = try await NetworkService.fetch(podcastId: podcast.id)
+                modelContext.insert(podcast)
+                for episode in podcast.episodes {
+                    episode.podcast = podcast
                 }
             } catch {
                 print(error.localizedDescription)

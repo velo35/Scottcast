@@ -33,10 +33,10 @@ extension EpisodeInfo
 
 extension Podcast
 {
-    static let mock = Podcast(from: PodcastLookup.mock.podcast)
+    static let mock = Podcast(from: PodcastLookup.mock.podcast, episodes: [.mock])
 }
 
 extension Episode
 {
-    static let mock = Episode(from: .mock, podcast: .mock)
+    static let mock = Episode(from: .mock)
 }
