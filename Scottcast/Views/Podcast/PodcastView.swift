@@ -35,6 +35,7 @@ struct PodcastView: View
                         .font(.subheadline)
                         .multilineTextAlignment(.center)
                 }
+                .frame(maxWidth: .infinity)
             }
             
             ForEach(podcast.sortedEpisodes) { episode in

@@ -10,9 +10,8 @@ import SwiftData
 
 struct LibraryView: View 
 {
-    @Environment(\.modelContext) var modelContext
-    @Query var podcasts: [Podcast]
-    
+    @Environment(\.modelContext) private var modelContext
+    @Query private var podcasts: [Podcast]
     @State private var selected: Podcast?
     private let player = PlayerController.shared
     
@@ -20,10 +19,40 @@ struct LibraryView: View
     {
         ZStack(alignment: .bottom) {
             NavigationStack {
-                PodcastGridView(podcasts: podcasts) { podcast in
-                    selected = podcast
+                ScrollView {
+                    LazyVGrid(columns: [.init(.fixed(160)), .init(.fixed(160))]) {
+                        ForEach(podcasts) { podcast in
+                            VStack {
+                                AsyncImage(url: podcast.artworkUrl600) { image in
+                                    image
+                                        .resizable()
+                                        .aspectRatio(contentMode: .fill)
+                                } placeholder: {
+                                    ProgressView()
+                                }
+                                
+                                Text(podcast.author)
+                            }
+                            .onTapGesture {
+                                selected = podcast
+                            }
+                        }
+                    }
                 }
-                .navigationTitle("Scottcast")
+                .refreshable {
+                    do {
+                        for podcast in podcasts {
+                            let podcast = try await NetworkService.fetch(podcastId: podcast.id)
+                            modelContext.insert(podcast)
+                            for episode in podcast.episodes {
+                                episode.podcast = podcast
+                            }                            
+                        }
+                    } catch {
+                        print(error.localizedDescription)
+                    }
+                }
+                .navigationTitle("Library")
                 .navigationDestination(item: $selected) { podcast in
                     PodcastView(podcast: podcast)
                 }

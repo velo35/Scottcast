@@ -18,8 +18,25 @@ struct SearchView: View
     var body: some View
     {
         NavigationStack {
-            PodcastGridView(podcasts: podcastInfos) { info in
-                selected = info
+            ScrollView {
+                LazyVGrid(columns: [.init(.fixed(160)), .init(.fixed(160))]) {
+                    ForEach(podcastInfos) { podcastInfo in
+                        VStack {
+                            AsyncImage(url: podcastInfo.artworkUrl600) { image in
+                                image
+                                    .resizable()
+                                    .aspectRatio(contentMode: .fill)
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            
+                            Text(podcastInfo.author)
+                        }
+                        .onTapGesture {
+                            selected = podcastInfo
+                        }
+                    }
+                }
             }
             .overlay {
                 if let info = selected {
