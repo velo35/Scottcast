@@ -11,7 +11,7 @@ import SwiftData
 struct LibraryView: View 
 {
     @Environment(\.modelContext) private var modelContext
-    @Query private var podcasts: [Podcast]
+    @Query(animation: .default) private var podcasts: [Podcast]
     @State private var selected: Podcast?
     private let player = PlayerController.shared
     
@@ -21,7 +21,7 @@ struct LibraryView: View
             NavigationStack {
                 ScrollView {
                     LazyVGrid(columns: [.init(.fixed(160)), .init(.fixed(160))]) {
-                        ForEach(podcasts) { podcast in
+                        ForEach(podcasts.sorted(by: { first, second in first.sortedEpisodes[0].date > second.sortedEpisodes[0].date })) { podcast in
                             VStack {
                                 AsyncImage(url: podcast.artworkUrl600) { image in
                                     image
