@@ -10,6 +10,7 @@ import SwiftUI
 @MainActor
 struct SearchView: View
 {
+    @Binding var selectedPodcast: Podcast?
     @Environment(\.modelContext) private var modelContext
     @State private var searchText = ""
     @State private var podcastInfos = [PodcastInfo]()
@@ -60,6 +61,7 @@ struct SearchView: View
                                     for episode in podcast.episodes {
                                         episode.podcast = podcast
                                     }
+                                    selectedPodcast = podcast
                                 } catch {
                                     print(error.localizedDescription)
                                 }
@@ -98,5 +100,5 @@ struct SearchView: View
 }
 
 #Preview {
-    SearchView()
+    SearchView(selectedPodcast: .constant(nil))
 }

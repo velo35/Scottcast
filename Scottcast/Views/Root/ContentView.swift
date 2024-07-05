@@ -10,18 +10,28 @@ import SwiftData
 
 struct ContentView: View 
 {
+    @State private var selectedPodcast: Podcast?
+    @State private var selectedTab = 0
+    
     var body: some View
     {
-        TabView {
-            LibraryView()
+        TabView(selection: $selectedTab) {
+            LibraryView(selectedPodcast: $selectedPodcast)
+                .tag(0)
                 .tabItem {
                     Label("Library", systemImage: "books.vertical")
                 }
             
-            SearchView()
+            SearchView(selectedPodcast: $selectedPodcast)
+                .tag(1)
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
                 }
+        }
+        .onChange(of: selectedPodcast) {
+            if selectedPodcast != nil {
+                selectedTab = 0
+            }
         }
     }
 }

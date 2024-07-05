@@ -10,9 +10,9 @@ import SwiftData
 
 struct LibraryView: View 
 {
+    @Binding var selectedPodcast: Podcast?
     @Environment(\.modelContext) private var modelContext
     @Query(animation: .default) private var podcasts: [Podcast]
-    @State private var selected: Podcast?
     private let player = PlayerController.shared
     
     var body: some View
@@ -34,7 +34,7 @@ struct LibraryView: View
                                 Text(podcast.author)
                             }
                             .onTapGesture {
-                                selected = podcast
+                                selectedPodcast = podcast
                             }
                         }
                     }
@@ -53,7 +53,7 @@ struct LibraryView: View
                     }
                 }
                 .navigationTitle("Library")
-                .navigationDestination(item: $selected) { podcast in
+                .navigationDestination(item: $selectedPodcast) { podcast in
                     PodcastView(podcast: podcast)
                 }
             }
@@ -63,23 +63,9 @@ struct LibraryView: View
                     .transition(.move(edge: .bottom))
             }
         }
-//        .task {
-//            do {
-//                let url = URL(string: "https://itunes.apple.com/lookup?id=1201483158&media=podcast&entity=podcastEpisode")!
-//                let data = try await NetworkService.fetch(url: url)
-//                let decoder = JSONDecoder()
-//                decoder.dateDecodingStrategy = .iso8601
-//                let info = try decoder.decode(PodcastInfo.self, from: data)
-//                let podcast = Podcast(from: info)
-//                
-//                modelContext.insert(podcast)
-//            } catch {
-//                print(error.localizedDescription)
-//            }
-//        }
     }
 }
 
 #Preview {
-    LibraryView()
+    LibraryView(selectedPodcast: .constant(nil))
 }
