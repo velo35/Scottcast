@@ -43,8 +43,11 @@ struct SearchView: View
                             } placeholder: {
                                 ProgressView()
                             }
+                            .frame(width: 120, height: 120)
                             
                             Text(podcastInfo.author)
+                            
+                            Spacer()
                         }
                         .onTapGesture {
                             selected = podcastInfo

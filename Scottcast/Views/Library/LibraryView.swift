@@ -30,6 +30,7 @@ struct LibraryView: View
                                 } placeholder: {
                                     ProgressView()
                                 }
+                                .frame(width: 160, height: 160)
                                 
                                 Text(podcast.author)
                             }
