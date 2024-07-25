@@ -9,7 +9,7 @@ import Foundation
 
 struct PodcastSearch
 {
-    let podcasts: [PodcastInfo]
+    let podcastInfos: [PodcastInfo]
 }
 
 extension PodcastSearch: Decodable
@@ -24,10 +24,10 @@ extension PodcastSearch: Decodable
         let container = try decoder.container(keyedBy: ContainerKeys.self)
         var resultsContainer = try container.nestedUnkeyedContainer(forKey: .results)
         
-        var podcasts = [PodcastInfo]()
+        var podcastInfos = [PodcastInfo]()
         while !resultsContainer.isAtEnd {
-            podcasts.append(try resultsContainer.decode(PodcastInfo.self))
+            podcastInfos.append(try resultsContainer.decode(PodcastInfo.self))
         }
-        self.podcasts = podcasts
+        self.podcastInfos = podcastInfos
     }
 }

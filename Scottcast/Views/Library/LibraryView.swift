@@ -40,17 +40,17 @@ struct LibraryView: View
                     }
                 }
                 .refreshable {
-                    do {
-                        for podcast in podcasts {
-                            let podcast = try await NetworkService.fetch(podcastId: podcast.id)
-                            modelContext.insert(podcast)
-                            for episode in podcast.episodes {
-                                episode.podcast = podcast
-                            }                            
-                        }
-                    } catch {
-                        print(error.localizedDescription)
-                    }
+//                    do {
+//                        for podcast in podcasts {
+//                            let podcast = try await NetworkService.fetch(podcastId: podcast.id)
+//                            modelContext.insert(podcast)
+//                            for episode in podcast.episodes {
+//                                episode.podcast = podcast
+//                            }                            
+//                        }
+//                    } catch {
+//                        print(error.localizedDescription)
+//                    }
                 }
                 .navigationTitle("Library")
                 .navigationDestination(item: $selectedPodcast) { podcast in

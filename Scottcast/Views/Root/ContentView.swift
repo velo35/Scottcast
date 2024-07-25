@@ -8,10 +8,32 @@
 import SwiftUI
 import SwiftData
 
-struct ContentView: View 
+@MainActor
+struct ContentView: View
 {
+    @Environment(\.modelContext) private var modelContext
     @State private var selectedPodcast: Podcast?
     @State private var selectedTab = 0
+    
+    private func addPodcast(id podcastId: PodcastInfo.ID)
+    {
+        Task {
+            do {
+                let lookup = try await NetworkService.lookup(podcastId: podcastId)
+                
+                let episodes = lookup.episodes.map { Episode(from: $0) }
+                let podcast = Podcast(from: lookup.podcast, episodes: episodes)
+                
+                modelContext.insert(podcast)
+                for episode in podcast.episodes {
+                    episode.podcast = podcast
+                }
+                selectedPodcast = podcast
+            } catch {
+                print(error.localizedDescription)
+            }
+        }
+    }
     
     var body: some View
     {
@@ -22,11 +44,13 @@ struct ContentView: View
                     Label("Library", systemImage: "books.vertical")
                 }
             
-            SearchView(selectedPodcast: $selectedPodcast)
-                .tag(1)
-                .tabItem {
-                    Label("Search", systemImage: "magnifyingglass")
-                }
+            SearchView() { id in
+                addPodcast(id: id)
+            }
+            .tag(1)
+            .tabItem {
+                Label("Search", systemImage: "magnifyingglass")
+            }
         }
         .onChange(of: selectedPodcast) {
             if selectedPodcast != nil {

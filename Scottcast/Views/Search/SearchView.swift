@@ -10,11 +10,24 @@ import SwiftUI
 @MainActor
 struct SearchView: View
 {
-    @Binding var selectedPodcast: Podcast?
-    @Environment(\.modelContext) private var modelContext
+    let addCallback: (PodcastInfo.ID) -> Void
     @State private var searchText = ""
     @State private var podcastInfos = [PodcastInfo]()
     @State private var selected: PodcastInfo?
+    
+    func search(term searchTerm: String)
+    {
+        Task {
+            let url = URL(string: "https://itunes.apple.com/search?term=\(searchTerm)&media=podcast")!
+            let data = try await NetworkService.fetch(url: url)
+            
+            let decoder = JSONDecoder()
+            decoder.dateDecodingStrategy = .iso8601
+            let search = try decoder.decode(PodcastSearch.self, from: data)
+            
+            self.podcastInfos = search.podcastInfos
+        }
+    }
     
     var body: some View
     {
@@ -54,18 +67,7 @@ struct SearchView: View
                         Text(info.title)
                         
                         Button("Add to Library") {
-                            Task {
-                                do {
-                                    let podcast = try await NetworkService.fetch(podcastId: info.id)
-                                    modelContext.insert(podcast)
-                                    for episode in podcast.episodes {
-                                        episode.podcast = podcast
-                                    }
-                                    selectedPodcast = podcast
-                                } catch {
-                                    print(error.localizedDescription)
-                                }
-                            }
+                            addCallback(info.id)
                             selected = nil
                         }
                         .buttonStyle(.borderedProminent)
@@ -83,22 +85,12 @@ struct SearchView: View
         }
         .searchable(text: $searchText)
         .onChange(of: searchText) {
-            guard let searchTerm = searchText.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { print("failed"); return }
-            
-            Task {
-                let url = URL(string: "https://itunes.apple.com/search?term=\(searchTerm)&media=podcast")!
-                let data = try await NetworkService.fetch(url: url)
-                
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .iso8601
-                let search = try decoder.decode(PodcastSearch.self, from: data)
-                
-                self.podcastInfos = search.podcasts
-            }
+            guard let term = searchText.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return }
+            self.search(term: term)
         }
     }
 }
 
 #Preview {
-    SearchView(selectedPodcast: .constant(nil))
+    SearchView() { _ in }
 }

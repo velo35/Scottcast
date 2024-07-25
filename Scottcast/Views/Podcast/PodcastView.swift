@@ -43,15 +43,15 @@ struct PodcastView: View
             }
         }
         .refreshable {
-            do {
-                let podcast = try await NetworkService.fetch(podcastId: podcast.id)
-                modelContext.insert(podcast)
-                for episode in podcast.episodes {
-                    episode.podcast = podcast
-                }
-            } catch {
-                print(error.localizedDescription)
-            }
+//            do {
+//                let podcast = try await NetworkService.fetch(podcastId: podcast.id)
+//                modelContext.insert(podcast)
+//                for episode in podcast.episodes {
+//                    episode.podcast = podcast
+//                }
+//            } catch {
+//                print(error.localizedDescription)
+//            }
         }
     }
 }
