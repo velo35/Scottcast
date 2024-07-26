@@ -23,14 +23,9 @@ struct LibraryView: View
                     LazyVGrid(columns: [.init(.fixed(160)), .init(.fixed(160))]) {
                         ForEach(podcasts.sorted(by: { first, second in first.sortedEpisodes[0].date > second.sortedEpisodes[0].date })) { podcast in
                             VStack {
-                                AsyncImage(url: podcast.artworkUrl600) { image in
-                                    image
-                                        .resizable()
-                                        .aspectRatio(contentMode: .fill)
-                                } placeholder: {
-                                    ProgressView()
-                                }
-                                .frame(width: 160, height: 160)
+                                Image(uiImage: UIImage(data: try! Data(contentsOf: podcast.thumbnailUrl))!)
+                                    .resizable()
+                                    .frame(width: 160, height: 160)
                                 
                                 Text(podcast.author)
                             }

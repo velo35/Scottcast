@@ -14,6 +14,7 @@ struct SearchView: View
     @State private var searchText = ""
     @State private var podcastInfos = [PodcastInfo]()
     @State private var selected: PodcastInfo?
+    @State private var imageCache = [PodcastInfo.ID: Data]()
     
     func search(term searchTerm: String)
     {
@@ -26,6 +27,12 @@ struct SearchView: View
             let search = try decoder.decode(PodcastSearch.self, from: data)
             
             self.podcastInfos = search.podcastInfos
+            
+            for info in podcastInfos {
+                guard self.imageCache[info.id] == nil else { continue }
+                let data = try await NetworkService.fetch(url: info.artworkUrl600)
+                self.imageCache[info.id] = data
+            }
         }
     }
     
@@ -33,17 +40,19 @@ struct SearchView: View
     {
         NavigationStack {
             ScrollView {
-                LazyVGrid(columns: [.init(.fixed(160)), .init(.fixed(160))]) {
+                LazyVGrid(columns: [.init(.fixed(160)), .init(.fixed(160))], spacing: 20) {
                     ForEach(podcastInfos) { podcastInfo in
                         VStack {
-                            AsyncImage(url: podcastInfo.artworkUrl600) { image in
-                                image
-                                    .resizable()
-                                    .aspectRatio(contentMode: .fill)
-                            } placeholder: {
-                                ProgressView()
+                            Group {
+                                if let data = self.imageCache[podcastInfo.id] {
+                                    Image(uiImage: UIImage(data: data)!)
+                                        .resizable()
+                                }
+                                else {
+                                    ProgressView()
+                                }
                             }
-                            .frame(width: 120, height: 120)
+                            .frame(width: 160, height: 160)
                             
                             Text(podcastInfo.author)
                             

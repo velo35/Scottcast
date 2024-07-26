@@ -52,4 +52,10 @@ extension Podcast
             episodes: episodes
         )
     }
+    
+    var thumbnailUrl: URL
+    {
+        URL.documentsDirectory
+            .appending(path: "thumbnails/\(self.id)")
+    }
 }

@@ -24,10 +24,15 @@ struct ContentView: View
                 let episodes = lookup.episodes.map { Episode(from: $0) }
                 let podcast = Podcast(from: lookup.podcast, episodes: episodes)
                 
+                let imageData = try await NetworkService.fetch(url: podcast.artworkUrl600)
+                try FileManager.default.createDirectory(at: podcast.thumbnailUrl.deletingLastPathComponent(), withIntermediateDirectories: true)
+                try imageData.write(to: podcast.thumbnailUrl)
+                
                 modelContext.insert(podcast)
                 for episode in podcast.episodes {
                     episode.podcast = podcast
                 }
+                
                 selectedPodcast = podcast
             } catch {
                 print(error.localizedDescription)
