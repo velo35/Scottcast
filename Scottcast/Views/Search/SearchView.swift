@@ -15,24 +15,33 @@ struct SearchView: View
     @State private var podcastInfos = [PodcastInfo]()
     @State private var selected: PodcastInfo?
     @State private var imageCache = [PodcastInfo.ID: Data]()
+    @State private var isLoading = false
     
     func search(term searchTerm: String)
     {
         Task {
-            let url = URL(string: "https://itunes.apple.com/search?term=\(searchTerm)&media=podcast")!
-            let data = try await NetworkService.fetch(url: url)
-            
-            let decoder = JSONDecoder()
-            decoder.dateDecodingStrategy = .iso8601
-            let search = try decoder.decode(PodcastSearch.self, from: data)
-            
-            self.podcastInfos = search.podcastInfos
-            
-            for info in podcastInfos {
-                guard self.imageCache[info.id] == nil else { continue }
-                let data = try await NetworkService.fetch(url: info.artworkUrl600)
-                self.imageCache[info.id] = data
+            isLoading = true
+            do {
+                let url = URL(string: "https://itunes.apple.com/search?term=\(searchTerm)&media=podcast")!
+                let data = try await NetworkService.fetch(url: url)
+                
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .iso8601
+                let search = try decoder.decode(PodcastSearch.self, from: data)
+                let podcastInfos = search.podcastInfos
+                
+                for info in podcastInfos {
+                    guard self.imageCache[info.id] == nil else { continue }
+                    let data = try await NetworkService.fetch(url: info.artworkUrl600)
+                    self.imageCache[info.id] = data
+                }
+                
+                self.podcastInfos = podcastInfos
             }
+            catch {
+                debugPrint(error.localizedDescription)
+            }
+            isLoading = false
         }
     }
     
@@ -92,6 +101,9 @@ struct SearchView: View
                     .onTapGesture {
                         selected = nil
                     }
+                }
+                else if isLoading {
+                    ProgressView()
                 }
             }
         }

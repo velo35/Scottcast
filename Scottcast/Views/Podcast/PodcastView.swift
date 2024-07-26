@@ -21,9 +21,10 @@ struct PodcastView: View
             let lookup = try await NetworkService.lookup(podcastId: podcast.id)
             let newEpisodeInfos = lookup.episodes.filter{ info in !self.podcast.episodes.contains(where: { $0.id == info.id }) }
             let newEpisodes = newEpisodeInfos.map{ Episode(from: $0) }
-            for episode in newEpisodes {
-                self.modelContext.insert(episode)
-                episode.podcast = podcast
+            
+            newEpisodes.forEach{ self.modelContext.insert($0) }
+            withAnimation {
+                podcast.episodes.append(contentsOf: newEpisodes)
             }
         } catch {
             debugPrint(error.localizedDescription)
@@ -64,15 +65,7 @@ struct PodcastView: View
             }
         }
         .refreshable {
-//            do {
-//                let podcast = try await NetworkService.fetch(podcastId: podcast.id)
-//                modelContext.insert(podcast)
-//                for episode in podcast.episodes {
-//                    episode.podcast = podcast
-//                }
-//            } catch {
-//                print(error.localizedDescription)
-//            }
+            await self.updatePodcast()
         }
     }
 }
