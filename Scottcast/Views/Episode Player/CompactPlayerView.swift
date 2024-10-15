@@ -14,7 +14,7 @@ struct CompactPlayerView: View
     var body: some View
     {
         HStack {
-            AsyncImage(url: episode.podcast!.artworkUrl60) { image in
+            AsyncImage(url: episode.podcast.artworkUrl60) { image in
                 image
                     .resizable()
             } placeholder: {

@@ -24,7 +24,7 @@ struct FullPlayerView: View
     var body: some View
     {
         VStack {
-            AsyncImage(url: episode.podcast!.artworkUrl60) { image in
+            AsyncImage(url: episode.podcast.artworkUrl600) { image in
                 image
                     .resizable()
             } placeholder: {

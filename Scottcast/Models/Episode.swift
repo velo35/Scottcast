@@ -19,7 +19,7 @@ final class Episode: Identifiable, Equatable
     let details: String
     let durationMillis: Int?
     let url: URL
-    var podcast: Podcast?
+    var podcast: Podcast! = nil
     var isDownloaded = false
     
     init(id: Int, podcastId: Int, title: String, date: Date, details: String, durationMillis: Int?, url: URL)

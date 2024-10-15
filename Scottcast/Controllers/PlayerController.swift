@@ -51,8 +51,6 @@ class PlayerController
             .assign(to: \.rate, on: self)
             .store(in: &self.cancellables)
         
-        
-        
         self.player = player
     }
     
