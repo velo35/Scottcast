@@ -12,48 +12,18 @@ struct SearchView: View
 {
     let addCallback: (PodcastInfo.ID) -> Void
     @State private var searchText = ""
-    @State private var podcastInfos = [PodcastInfo]()
     @State private var selected: PodcastInfo?
-    @State private var imageCache = [PodcastInfo.ID: Data]()
-    @State private var isLoading = false
-    
-    func search(term searchTerm: String)
-    {
-        Task {
-            isLoading = true
-            do {
-                let url = URL(string: "https://itunes.apple.com/search?term=\(searchTerm)&media=podcast")!
-                let data = try await NetworkService.fetch(url: url)
-                
-                let decoder = JSONDecoder()
-                decoder.dateDecodingStrategy = .iso8601
-                let search = try decoder.decode(PodcastSearch.self, from: data)
-                let podcastInfos = search.podcastInfos
-                
-                for info in podcastInfos {
-                    guard self.imageCache[info.id] == nil else { continue }
-                    let data = try await NetworkService.fetch(url: info.artworkUrl600)
-                    self.imageCache[info.id] = data
-                }
-                
-                self.podcastInfos = podcastInfos
-            }
-            catch {
-                debugPrint(error.localizedDescription)
-            }
-            isLoading = false
-        }
-    }
+    private let viewModel = SearchViewModel()
     
     var body: some View
     {
         NavigationStack {
             ScrollView {
                 LazyVGrid(columns: [.init(.fixed(160)), .init(.fixed(160))], spacing: 20) {
-                    ForEach(podcastInfos) { podcastInfo in
+                    ForEach(viewModel.podcastInfos) { podcastInfo in
                         VStack {
                             Group {
-                                if let data = self.imageCache[podcastInfo.id] {
+                                if let data = viewModel.images[podcastInfo.id] {
                                     Image(uiImage: UIImage(data: data)!)
                                         .resizable()
                                 }
@@ -102,7 +72,7 @@ struct SearchView: View
                         selected = nil
                     }
                 }
-                else if isLoading {
+                else if viewModel.isLoading {
                     ProgressView()
                 }
             }
@@ -110,7 +80,7 @@ struct SearchView: View
         .searchable(text: $searchText)
         .onChange(of: searchText) {
             guard let term = searchText.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) else { return }
-            self.search(term: term)
+            viewModel.search(term: term)
         }
     }
 }
