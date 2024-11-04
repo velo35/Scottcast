@@ -59,7 +59,7 @@ struct EpisodeCellView: View
                 PlayPauseButton(episode: episode)
                 
                 if let millis = episode.durationMillis {
-                    Text(.milliseconds(millis), format: .time(pattern: .minuteSecond))
+                    Text(.milliseconds(millis), format: .time(pattern: millis < 3600000 ? .minuteSecond : .hourMinuteSecond))
                 }
                 
                 Spacer()

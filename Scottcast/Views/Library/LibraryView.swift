@@ -20,7 +20,7 @@ struct LibraryView: View
         ZStack(alignment: .bottom) {
             NavigationStack {
                 ScrollView {
-                    LazyVGrid(columns: [.init(.fixed(160)), .init(.fixed(160))]) {
+                    LazyVGrid(columns: [.init(.fixed(160), alignment: .top), .init(.fixed(160), alignment: .top)]) {
                         ForEach(podcasts.sorted(by: { first, second in first.sortedEpisodes[0].date > second.sortedEpisodes[0].date })) { podcast in
                             VStack {
                                 Image(uiImage: UIImage(data: try! Data(contentsOf: podcast.thumbnailUrl))!)
